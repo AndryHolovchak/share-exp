@@ -58,6 +58,8 @@ ${product.reviews
   } as const;
 
   return unstable_cache(async () => {
+    return "mock";
+
     const response = await openai.chat.completions.create(query);
 
     // Convert the response into a friendly text-stream
