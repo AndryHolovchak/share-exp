@@ -3,14 +3,14 @@ import OpenAI from "openai";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { Product } from "./types";
 
-if (!process.env.PERPLEXITY_API_KEY) {
+if (!process.env.OPENAI_API_KEY) {
   throw new Error(
-    "PERPLEXITY_API_KEY environment variable is required. You can get this via https://vercel.com/docs/integrations/ai"
+    "OPENAI_API_KEY environment variable is required. You can get this via https://vercel.com/docs/integrations/ai"
   );
 }
-const perplexity = new OpenAI({
-  apiKey: process.env.PERPLEXITY_API_KEY || "",
-  baseURL: "https://api.perplexity.ai",
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY || "",
+  baseURL: "https://api.openai.com",
 });
 
 export async function summarizeReviews(product: Product) {
@@ -58,7 +58,7 @@ ${product.reviews
   } as const;
 
   return unstable_cache(async () => {
-    const response = await perplexity.chat.completions.create(query);
+    const response = await openai.chat.completions.create(query);
 
     // Convert the response into a friendly text-stream
     const stream = OpenAIStream(response);
