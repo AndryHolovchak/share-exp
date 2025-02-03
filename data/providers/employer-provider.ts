@@ -5,6 +5,7 @@ import { REVIEW_DATA } from '@/data/providers/review-provider';
 const DATA: Record<Employer['id'], Employer> = {
   '1': {
     id: '1',
+    averageRating: 1,
     name: 'Roshen',
     categories: ['Роздрібна торгівля'],
     description:

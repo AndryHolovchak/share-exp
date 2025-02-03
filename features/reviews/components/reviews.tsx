@@ -7,27 +7,27 @@ import { Review } from '@/features/reviews/types';
 
 export async function Reviews({ product }: { product: Employer }) {
   return (
-    <div className="mx-auto px-4 md:px-6 max-w-2xl grid gap-12">
+    <div className="mx-auto grid max-w-2xl gap-12 px-4 md:px-6">
       <AIReviewSummary product={product} />
       {product.reviews.map((review) => (
         <div key={review.review}>
-          <Review key={review.review} review={review} />
+          <ReviewView key={review.review} review={review} />
         </div>
       ))}
     </div>
   );
 }
 
-export function Review({ review }: { review: Review }) {
+export function ReviewView({ review }: { review: Review }) {
   const date = new Date(review.date);
   return (
     <div className="flex gap-4">
-      <Avatar className="w-10 h-10 border">
+      <Avatar className="h-10 w-10 border">
         <AvatarImage alt="@shadcn" src="/placeholder-user.jpg" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       <div className="grid gap-4">
-        <div className="flex gap-4 items-start">
+        <div className="flex items-start gap-4">
           <div className="grid gap-0.5 text-sm">
             <h3 className="font-semibold">{review.authorName}</h3>
             <time
@@ -37,8 +37,8 @@ export function Review({ review }: { review: Review }) {
               {timeAgo(date)}
             </time>
           </div>
-          <div className="flex items-center gap-0.5 ml-auto">
-            <FiveStarRating rating={review.stars} />
+          <div className="ml-auto flex items-center gap-0.5">
+            <FiveStarRating rating={review.rating} />
           </div>
         </div>
         <div className="text-sm leading-loose text-gray-500 dark:text-gray-400">
