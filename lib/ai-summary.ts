@@ -1,7 +1,7 @@
 import { unstable_cache } from 'next/cache';
 import OpenAI from 'openai';
 import { OpenAIStream, StreamingTextResponse } from 'ai';
-import { Product } from '@/features/product/types';
+import { Employer } from '@/features/employers/types';
 
 if (!process.env.OPENAI_API_KEY) {
   throw new Error(
@@ -13,7 +13,7 @@ const openai = new OpenAI({
   baseURL: 'https://api.openai.com/v1',
 });
 
-export async function summarizeReviews(product: Product) {
+export async function summarizeReviews(product: Employer) {
   const averageRating =
     product.reviews.reduce((acc, review) => acc + review.stars, 0) /
     product.reviews.length;

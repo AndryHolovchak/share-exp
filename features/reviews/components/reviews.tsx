@@ -2,10 +2,10 @@ import { AvatarImage, AvatarFallback, Avatar } from '@/components/ui/avatar';
 import ms from 'ms';
 import { FiveStarRating } from './five-star-rating';
 import { AIReviewSummary } from './ai-review-summary';
-import { Product } from '@/features/product/types';
-import { Review } from '@/features/review/types';
+import { Employer } from '@/features/employers/types';
+import { Review } from '@/features/reviews/types';
 
-export async function Reviews({ product }: { product: Product }) {
+export async function Reviews({ product }: { product: Employer }) {
   return (
     <div className="mx-auto px-4 md:px-6 max-w-2xl grid gap-12">
       <AIReviewSummary product={product} />
