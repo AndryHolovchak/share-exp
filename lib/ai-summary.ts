@@ -10,7 +10,7 @@ if (!process.env.OPENAI_API_KEY) {
 }
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || "",
-  baseURL: "https://api.openai.com",
+  baseURL: "https://api.openai.com/v1",
 });
 
 export async function summarizeReviews(product: Product) {
@@ -48,7 +48,7 @@ ${product.reviews
   .join("\n\n")}`;
 
   const query = {
-    model: "pplx-7b-chat",
+    model: "gpt-4o-mini",
     stream: true,
     messages: buildPrompt(prompt),
     max_tokens: 1000,
