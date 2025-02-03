@@ -1,16 +1,16 @@
-import { unstable_cache } from "next/cache";
-import OpenAI from "openai";
-import { OpenAIStream, StreamingTextResponse } from "ai";
-import { Product } from "./types";
+import { unstable_cache } from 'next/cache';
+import OpenAI from 'openai';
+import { OpenAIStream, StreamingTextResponse } from 'ai';
+import { Product } from '@/features/product/types';
 
 if (!process.env.OPENAI_API_KEY) {
   throw new Error(
-    "OPENAI_API_KEY environment variable is required. You can get this via https://vercel.com/docs/integrations/ai"
+    'OPENAI_API_KEY environment variable is required. You can get this via https://vercel.com/docs/integrations/ai'
   );
 }
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || "",
-  baseURL: "https://api.openai.com/v1",
+  apiKey: process.env.OPENAI_API_KEY || '',
+  baseURL: 'https://api.openai.com/v1',
 });
 
 export async function summarizeReviews(product: Product) {
@@ -45,10 +45,10 @@ Hit the following tone based on rating:
 The customer reviews to summarize are as follows:
 ${product.reviews
   .map((review, i) => `Review ${i + 1}:\n${review.review}`)
-  .join("\n\n")}`;
+  .join('\n\n')}`;
 
   const query = {
-    model: "gpt-4o-mini",
+    model: 'gpt-4o-mini',
     stream: true,
     messages: buildPrompt(prompt),
     max_tokens: 1000,
@@ -58,7 +58,7 @@ ${product.reviews
   } as const;
 
   return unstable_cache(async () => {
-    return "mock";
+    return 'mock';
 
     const response = await openai.chat.completions.create(query);
 
@@ -71,22 +71,22 @@ ${product.reviews
     // Remove the quotes from the response tht the LLM sometimes adds.
     text = text
       .trim()
-      .replace(/^"/, "")
-      .replace(/"$/, "")
-      .replace(/[\[\(]\d+ words[\]\)]/g, "");
+      .replace(/^"/, '')
+      .replace(/"$/, '')
+      .replace(/[\[\(]\d+ words[\]\)]/g, '');
     return text;
   }, [
     JSON.stringify(query),
-    "1.0",
-    process.env.VERCEL_BRANCH_URL || "",
-    process.env.NODE_ENV || "",
+    '1.0',
+    process.env.VERCEL_BRANCH_URL || '',
+    process.env.NODE_ENV || '',
   ])();
 }
 
-function buildPrompt(prompt: string): [{ role: "user"; content: string }] {
+function buildPrompt(prompt: string): [{ role: 'user'; content: string }] {
   return [
     {
-      role: "user",
+      role: 'user',
       content: prompt,
     },
   ];

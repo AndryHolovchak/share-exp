@@ -1,48 +1,38 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Link from "next/link";
-import { sampleProductsReviews } from "@/lib/sample-data";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Link from 'next/link';
+import { ReactNode } from 'react';
+import productProvider from '@/data/providers/product-provider';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Review summary",
-  description: "AI summaries of customer reviews",
+  title: 'Review summary',
+  description: 'AI summaries of customer reviews',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
-  const products = sampleProductsReviews;
+  const products = await productProvider.list();
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <nav className="flex justify-around py-4 border-b mb-8">
-          {Object.keys(products).map((productId) => (
+          {products.map((product) => (
             <Link
-              key={productId}
+              key={product.id}
               className="text-lg font-semibold"
-              href={`/${productId}`}
+              href={`/${product.id}`}
             >
-              {products[productId].name}
+              {product.name}
             </Link>
           ))}
         </nav>
-        <p className="text-center text-gray-500 mb-8">
-          This is a demo of AI-generated summaries of customer reviews. To learn
-          more, see the{" "}
-          <Link
-            className="underline"
-            target="_blank"
-            href="https://vercel.com/templates/next.js/customer-reviews-ai-summary-nextjs-vercel"
-          >
-            complete template
-          </Link>
-          .{"\n          "}
-        </p>
         <main className="pt-6">{children}</main>
       </body>
     </html>

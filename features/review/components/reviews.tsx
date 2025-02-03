@@ -1,8 +1,9 @@
-import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
-import { Product, Review as ReviewType } from "@/lib/types";
-import ms from "ms";
-import { FiveStarRating } from "./five-star-rating";
-import { AIReviewSummary } from "./ai-review-summary";
+import { AvatarImage, AvatarFallback, Avatar } from '@/components/ui/avatar';
+import ms from 'ms';
+import { FiveStarRating } from './five-star-rating';
+import { AIReviewSummary } from './ai-review-summary';
+import { Product } from '@/features/product/types';
+import { Review } from '@/features/review/types';
 
 export async function Reviews({ product }: { product: Product }) {
   return (
@@ -17,7 +18,7 @@ export async function Reviews({ product }: { product: Product }) {
   );
 }
 
-export function Review({ review }: { review: ReviewType }) {
+export function Review({ review }: { review: Review }) {
   const date = new Date(review.date);
   return (
     <div className="flex gap-4">
@@ -53,9 +54,9 @@ export function Review({ review }: { review: ReviewType }) {
  */
 const timeAgo = (date: Date, suffix = true) => {
   if (Date.now() - date.getTime() < 1000) {
-    return "Just now";
+    return 'Just now';
   }
   return `${ms(Date.now() - date.getTime(), { long: true })}${
-    suffix ? " ago" : ""
+    suffix ? ' ago' : ''
   }`;
 };
