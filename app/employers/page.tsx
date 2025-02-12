@@ -1,13 +1,15 @@
-import employerProvider from '@/data/providers/employer-provider';
-import EmployerCard from '@/features/employers/components/employer-card';
 import { PageTitle } from '@/components/laylout/page-title';
-import Link from 'next/link';
 import { PageHeader } from '@/components/laylout/page-header';
 import { EmployersSearch } from '@/features/employers/components/employers-search/employers-search';
 import { PageContent } from '@/components/laylout/page-content';
+import { EmployersList } from '@/app/employers/_containers/employers-list';
+import { NextPageProps } from '@/types/next';
+import { SEARCH_PARAM } from '@/constants/search-params';
 
-export default async function Page() {
-  const employers = await employerProvider.list();
+type Props = NextPageProps<never, { [SEARCH_PARAM]?: string }>;
+
+export default async function Page(props: Props) {
+  const searchParams = await props.searchParams;
 
   return (
     <div>
@@ -16,13 +18,7 @@ export default async function Page() {
         centralSlot={<EmployersSearch />}
       />
       <PageContent>
-        <div className="flex flex-col items-center gap-4">
-          {employers.map((employer) => (
-            <Link href={`/employers/${employer.id}`} key={employer.id}>
-              <EmployerCard employer={employer} className="w-[720px]" />
-            </Link>
-          ))}
-        </div>
+        <EmployersList search={searchParams?.search} />
       </PageContent>
     </div>
   );

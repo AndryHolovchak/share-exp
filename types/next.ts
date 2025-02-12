@@ -1,4 +1,4 @@
-export interface NextPageProps<Params, SearchParams = null> {
+export interface NextPageProps<Params, SearchParams = {}> {
   params: Params;
-  searchParams?: SearchParams;
+  searchParams?: Promise<SearchParams>;
 }

@@ -9,7 +9,7 @@ type Props = NextPageProps<{ employerId: string }>;
 
 export default async function ProductPage({ params: { employerId } }: Props) {
   const employer = await employerProvider.get(employerId);
-  // console.log(employer);
+
   if (!employer) {
     return <div>unknown employer</div>;
   }

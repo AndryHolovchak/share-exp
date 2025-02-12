@@ -12,7 +12,7 @@ export async function Reviews({ employer }: { employer: Employer }) {
       <div className="sticky top-0 z-30 mb-6 flex border-b bg-white py-6">
         <div className="mx-auto flex flex-1 flex-col gap-4">
           <AIReviewSummary employer={employer} />
-          <AddReviewDialog employerId={employer.id} />
+          <AddReviewDialog employerId={employer._id} />
         </div>
       </div>
 

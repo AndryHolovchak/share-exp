@@ -27,7 +27,7 @@ export function PageHeader({ leftSlot, centralSlot, rightSlot }: Props) {
           </Button>
         </Link>
 
-        <div className="grid grid-cols-[0.5fr_1fr_0.5fr] gap-2">
+        <div className="grid flex-1 grid-cols-[0.5fr_1fr_0.5fr] gap-2">
           <Slot>{leftSlot}</Slot>
           <Slot className="justify-center">{centralSlot}</Slot>
           <Slot>{rightSlot}</Slot>
