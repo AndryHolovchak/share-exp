@@ -5,26 +5,26 @@ import {
   CardDescription,
   CardHeader,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { FiveStarRating } from '@/features/reviews/components/five-star-rating';
+import { RatingView } from '@/features/reviews/components/rating-view/rating-view';
+import { EyeIcon } from 'lucide-react';
+import Image from 'next/image';
+import { EmployerBaseInfo } from '@/features/employers/components/employer-base-info';
 
 interface Props {
   employer: Employer;
+  className?: string;
 }
 
-export default function EmployerCard({ employer }: Props) {
+export default function EmployerCard({ employer, className }: Props) {
   return (
-    <Card>
+    <Card className={className}>
       <CardHeader>
-        <div className="flex gap-2">
-          <span>{employer.name}</span>
-          <FiveStarRating rating={employer.averageRating} />
-        </div>
-
-        <div className="flex gap-2">
-          {employer.categories.map((category) => (
-            <Badge>{category}</Badge>
-          ))}
+        <div className="flex justify-between">
+          <EmployerBaseInfo employer={employer} />
+          <div className="flex-0 flex h-fit items-center gap-1 text-muted-foreground">
+            <EyeIcon width={18} />
+            {employer.totalViews}
+          </div>
         </div>
       </CardHeader>
       <CardContent>

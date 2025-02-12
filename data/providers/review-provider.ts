@@ -5,12 +5,13 @@ export const REVIEW_DATA: Record<Review['id'], Review> = {
   '1': {
     id: '1',
     rating: 1,
-    date: '2024-02-15',
-    review: 'Just a crap!',
-    authorName: 'Volodymyr Zelensky',
+    createdAt: '2024-02-15',
+    content: 'Чорти!',
+    authorName: 'Володимир Зеленський',
   },
 };
 
-const reviewProvider = new DataProvider(REVIEW_DATA);
+export const REVIEW_TAG = 'review';
+const reviewProvider = new DataProvider<Review>(REVIEW_TAG, 'reviews');
 
 export default reviewProvider;

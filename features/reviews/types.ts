@@ -1,9 +1,9 @@
-export type ReviewRating = 1 | 2 | 3 | 4 | 5;
+export type Rating = 1 | 2 | 3 | 4 | 5;
 
 export interface Review {
   id: string;
-  review: string;
+  content: string;
+  rating: Rating;
+  createdAt: string;
   authorName: string;
-  date: string;
-  rating: ReviewRating;
 }

@@ -1,33 +1,38 @@
 import { AvatarImage, AvatarFallback, Avatar } from '@/components/ui/avatar';
 import ms from 'ms';
-import { FiveStarRating } from './five-star-rating';
+import { RatingView } from './rating-view/rating-view';
 import { AIReviewSummary } from './ai-review-summary';
 import { Employer } from '@/features/employers/types';
 import { Review } from '@/features/reviews/types';
+import AddReviewDialog from '@/features/reviews/components/add-review-dialog';
 
-export async function Reviews({ product }: { product: Employer }) {
+export async function Reviews({ employer }: { employer: Employer }) {
   return (
-    <div className="mx-auto grid max-w-2xl gap-12 px-4 md:px-6">
-      <AIReviewSummary product={product} />
-      {product.reviews.map((review) => (
-        <div key={review.review}>
-          <ReviewView key={review.review} review={review} />
+    <div className="relative mx-auto max-w-[960px] gap-12 px-4 md:px-6">
+      <div className="sticky top-0 z-30 mb-6 flex border-b bg-white py-6">
+        <div className="mx-auto flex flex-1 flex-col gap-4">
+          <AIReviewSummary employer={employer} />
+          <AddReviewDialog employerId={employer.id} />
         </div>
-      ))}
+      </div>
+
+      {/*<div key={review.id}>*/}
+      {/*  <ReviewView key={review.content} review={review} />*/}
+      {/*</div>*/}
     </div>
   );
 }
 
 export function ReviewView({ review }: { review: Review }) {
-  const date = new Date(review.date);
+  const date = new Date(review.createdAt);
   return (
     <div className="flex gap-4">
       <Avatar className="h-10 w-10 border">
         <AvatarImage alt="@shadcn" src="/placeholder-user.jpg" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
-      <div className="grid gap-4">
-        <div className="flex items-start gap-4">
+      <div className="grid gap-1">
+        <div className="flex items-start gap-2">
           <div className="grid gap-0.5 text-sm">
             <h3 className="font-semibold">{review.authorName}</h3>
             <time
@@ -38,11 +43,11 @@ export function ReviewView({ review }: { review: Review }) {
             </time>
           </div>
           <div className="ml-auto flex items-center gap-0.5">
-            <FiveStarRating rating={review.rating} />
+            <RatingView rating={review.rating} />
           </div>
         </div>
         <div className="text-sm leading-loose text-gray-500 dark:text-gray-400">
-          <p>{review.review}</p>
+          <p>{review.content}</p>
         </div>
       </div>
     </div>

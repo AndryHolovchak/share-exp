@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Link from 'next/link';
 import { ReactNode } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -19,7 +18,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="flex-1 p-6">{children}</main>
+        <div className="relative h-lvh flex-1">{children}</div>
       </body>
     </html>
   );
