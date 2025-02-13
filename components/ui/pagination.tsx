@@ -22,7 +22,7 @@ export function Pagination({ count, page, limit }: Props) {
   return (
     <div className="mt-6 flex items-center justify-end gap-2">
       <span className="text-muted-foreground">
-        {from}-{to} з {count}
+        {from}-{to} / {count}
       </span>
       <div className="flex">
         <Button
