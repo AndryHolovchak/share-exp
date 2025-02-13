@@ -5,9 +5,7 @@ import {
   CardDescription,
   CardHeader,
 } from '@/components/ui/card';
-import { RatingView } from '@/features/reviews/components/rating-view/rating-view';
 import { EyeIcon } from 'lucide-react';
-import Image from 'next/image';
 import { EmployerBaseInfo } from '@/features/employers/components/employer-base-info';
 
 interface Props {

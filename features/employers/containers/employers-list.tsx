@@ -2,10 +2,7 @@ import { fetchAllEmployers } from '@/features/employers/api';
 import Link from 'next/link';
 import EmployerCard from '@/features/employers/components/employer-card';
 import { ListParams } from '@/types/list';
-import {
-  calculateTotalPages,
-  normalizeListParams,
-} from '@/utils/normalizeListParams';
+import { normalizeListParams } from '@/utils/normalizeListParams';
 import { Pagination } from '@/components/ui/pagination';
 
 export async function EmployersList(params: ListParams) {

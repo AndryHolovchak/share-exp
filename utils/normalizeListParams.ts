@@ -1,4 +1,4 @@
-import { ListPaginationParams, ListParams } from '@/types/list';
+import { ListParams } from '@/types/list';
 
 export function normalizeListParams(params: ListParams): Required<ListParams> {
   return {
@@ -6,8 +6,4 @@ export function normalizeListParams(params: ListParams): Required<ListParams> {
     limit: Math.max(10, params.page ?? 10),
     search: params.search ?? '',
   };
-}
-
-export function calculateTotalPages(limit: number, count: number): number {
-  return Math.ceil(count / limit) && 40;
 }
