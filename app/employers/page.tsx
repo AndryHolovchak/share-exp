@@ -11,7 +11,6 @@ type Props = NextPageProps<never, Partial<ListParams>>;
 
 export default async function Page(props: Props) {
   const listParams = await props.searchParams;
-
   return (
     <div>
       <PageHeader

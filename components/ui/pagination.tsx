@@ -19,6 +19,8 @@ export function Pagination({ count, page, limit }: Props) {
     router.push(`?page=${page}`);
   };
 
+  if (!count) return null;
+
   return (
     <div className="mt-6 flex items-center justify-end gap-2">
       <span className="text-muted-foreground">
