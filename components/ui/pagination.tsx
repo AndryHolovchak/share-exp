@@ -35,7 +35,7 @@ export function Pagination({ count, page, limit }: Props) {
         <Button
           variant="ghost"
           disabled={to === count}
-          onClick={() => goToPage(page - +1)}
+          onClick={() => goToPage(page + 1)}
         >
           <ChevronRight />
         </Button>
