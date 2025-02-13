@@ -1,0 +1,1 @@
+Add animation for employers search placeholder, like user types some most popular companies and then deletes them

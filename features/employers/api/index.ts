@@ -1,8 +1,8 @@
 import { Employer } from '@/features/employers/types';
 import { apiFetch } from '@/api-fetch/api-fetch';
-import { SEARCH_PARAM } from '@/constants/search-params';
+import { ListParams, ListResponse } from '@/types/list';
 
-export const fetchAllEmployers = async (search: string | null) =>
-  apiFetch<Employer[]>('/employers', {
-    searchParams: { [SEARCH_PARAM]: search },
+export const fetchAllEmployers = async (params: ListParams) =>
+  apiFetch<ListResponse<Employer>>('/employers', {
+    searchParams: { ...params },
   });

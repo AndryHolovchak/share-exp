@@ -1,7 +1,7 @@
 import { API_URL } from '@/constants/config-global';
 
 interface Config {
-  searchParams?: Record<string, string | undefined | null>;
+  searchParams?: Record<string, number | string | undefined | null>;
   options?: RequestInit;
 }
 

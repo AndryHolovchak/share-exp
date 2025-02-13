@@ -9,6 +9,7 @@ interface Props {
   leftSlot?: ReactNode;
   centralSlot?: ReactNode;
   rightSlot?: ReactNode;
+  withBackButton?: boolean;
 }
 
 function Slot(props: HTMLProps<HTMLDivElement>) {
@@ -17,15 +18,22 @@ function Slot(props: HTMLProps<HTMLDivElement>) {
   );
 }
 
-export function PageHeader({ leftSlot, centralSlot, rightSlot }: Props) {
+export function PageHeader({
+  leftSlot,
+  centralSlot,
+  rightSlot,
+  withBackButton,
+}: Props) {
   return (
     <header className="sticky top-0">
       <Card className="mb-8 flex items-center rounded-none p-6">
-        <Link href="./">
-          <Button variant="outline" className="mr-6">
-            <ChevronLeft />
-          </Button>
-        </Link>
+        {withBackButton && (
+          <Link href="./">
+            <Button variant="outline" className="mr-6">
+              <ChevronLeft />
+            </Button>
+          </Link>
+        )}
 
         <div className="grid flex-1 grid-cols-[0.5fr_1fr_0.5fr] gap-2">
           <Slot>{leftSlot}</Slot>
