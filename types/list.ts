@@ -4,8 +4,8 @@ export interface ListResponse<T> {
 }
 
 export interface ListPaginationParams {
-  page?: number;
-  limit?: number;
+  page: number;
+  limit: number;
 }
 
 export interface ListSearchParams {
