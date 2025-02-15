@@ -10,6 +10,7 @@ interface Props {
   centralSlot?: ReactNode;
   rightSlot?: ReactNode;
   withBackButton?: boolean;
+  backButtonHref?: string;
 }
 
 function Slot(props: HTMLProps<HTMLDivElement>) {
@@ -23,12 +24,13 @@ export function PageHeader({
   centralSlot,
   rightSlot,
   withBackButton,
+  backButtonHref,
 }: Props) {
   return (
     <header className="sticky top-0">
       <Card className="mb-8 flex items-center rounded-none p-6">
         {withBackButton && (
-          <Link href="./">
+          <Link href={backButtonHref ?? './'}>
             <Button variant="outline" className="mr-6">
               <ChevronLeft />
             </Button>

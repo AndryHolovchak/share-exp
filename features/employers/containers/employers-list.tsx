@@ -22,7 +22,7 @@ export async function EmployersList(params: ListParams) {
       }}
     >
       {employers.rows.map((employer) => (
-        <Link href={`/employers/${employer._id}`} key={employer._id}>
+        <Link href={`/employers/${employer._id}/reviews`} key={employer._id}>
           <EmployerCard employer={employer} />
         </Link>
       ))}
