@@ -5,7 +5,7 @@ import { Review } from '@/features/reviews/types';
 import reviewProvider from '@/data/providers/review-provider';
 
 type Params = {
-  employerId: Employer['id'];
+  employerId: Employer['_id'];
 } & Pick<Review, 'content' | 'rating'>;
 
 export default async function addReviewAction({

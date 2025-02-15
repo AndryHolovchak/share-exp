@@ -14,10 +14,6 @@ import { DialogBody } from 'next/dist/client/components/react-dev-overlay/intern
 import ReviewForm from '@/features/reviews/components/review-form';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Employer } from '@/features/employers/types';
-import { revalidatePath } from 'next/cache';
-import { makListTag } from '@/data/data-provider';
-import { EMPLOYER_TAG } from '@/data/providers/employer-provider';
 
 interface Props {
   employerId: string;
