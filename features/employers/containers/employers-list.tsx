@@ -13,6 +13,7 @@ export async function EmployersList(params: ListParams) {
       count={employers.count}
       pagination={params}
       emptyStateProps={{
+        imageSrc: '/illustrations/searching.png',
         title: (
           <>
             На жаль, я не знаю такого роботодавця <Frown />

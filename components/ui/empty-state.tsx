@@ -2,15 +2,17 @@ import Image from 'next/image';
 import { ReactNode } from 'react';
 
 export interface EmptyStateProps {
+  imageSrc: string;
   title: ReactNode;
 }
 
-export function EmptyState({ title }: EmptyStateProps) {
+export function EmptyState({ title, imageSrc }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <Image
-        src="/illustrations/searching.png"
+        src={imageSrc}
         alt="empty"
+        className="pointer-events-none select-none"
         width={400}
         height={400}
       />
