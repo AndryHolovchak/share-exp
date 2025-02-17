@@ -1,8 +1,21 @@
 import { Employer } from '@/features/employers/types';
-import { apiFetch } from '@/api-fetch/api-fetch';
-import { ListParams, ListResponse } from '@/types/list';
+import { apiAction, apiFetch, apiGet } from '@/network/api-fetch';
+import { ListPaginationParams, ListParams, ListResponse } from '@/types/list';
+import { Review, ReviewFormValues } from '@/features/reviews/types';
 
-export const fetchAllEmployers = async (params: ListParams) =>
-  apiFetch<ListResponse<Employer>>('/employers', {
-    searchParams: { ...params },
-  });
+const EMPLOYERS_API = {
+  fetchAllEmployers: async (params: ListParams) =>
+    apiGet<ListResponse<Employer>>('/employers', params),
+
+  fetchEmployerById: async (id: string) => apiGet<Employer>(`/employers/${id}`),
+
+  fetchEmployerReviews: async (id: string, params: ListPaginationParams) =>
+    apiGet<ListResponse<Review>>(`/employers/${id}/reviews`, params),
+
+  createReview: async (id: string, body: ReviewFormValues) =>
+    apiAction<ListResponse<Review>>(`/employers/${id}/reviews`, {
+      body,
+    }),
+};
+
+export default EMPLOYERS_API;

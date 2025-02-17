@@ -5,9 +5,9 @@ import { PageContent } from '@/components/laylout/page-content';
 import { EmployersList } from '@/features/employers/containers/employers-list';
 import { NextPageProps } from '@/types/next';
 import { ListParams } from '@/types/list';
-import { normalizeListParams } from '@/utils/normalizeListParams';
+import { normalizeListParams } from '@/utils/normalize-list-params';
 
-type Props = NextPageProps<never, Partial<ListParams>>;
+type Props = NextPageProps<never, ListParams>;
 
 export default async function Page(props: Props) {
   const listParams = await props.searchParams;
@@ -18,7 +18,7 @@ export default async function Page(props: Props) {
         centralSlot={<EmployersSearch />}
       />
       <PageContent>
-        <EmployersList {...normalizeListParams(listParams || {})} />
+        <EmployersList {...normalizeListParams(listParams)} />
       </PageContent>
     </div>
   );

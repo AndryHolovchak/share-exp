@@ -1,4 +1,4 @@
 export interface NextPageProps<Params, SearchParams = {}> {
-  params: Params;
-  searchParams?: Promise<SearchParams>;
+  params: Promise<Params>;
+  searchParams: Promise<Partial<SearchParams>>;
 }

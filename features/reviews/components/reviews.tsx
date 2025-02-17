@@ -1,24 +1,27 @@
 import { AvatarImage, AvatarFallback, Avatar } from '@/components/ui/avatar';
 import ms from 'ms';
 import { RatingView } from './rating-view/rating-view';
-import { AIReviewSummary } from './ai-review-summary';
-import { Employer } from '@/features/employers/types';
 import { Review } from '@/features/reviews/types';
-import AddReviewDialog from '@/features/reviews/components/add-review-dialog';
+import { ListPaginationParams, ListResponse } from '@/types/list';
+import { List } from '@/components/ui/list';
 
-export async function Reviews({ employer }: { employer: Employer }) {
+interface Props {
+  reviews: ListResponse<Review>;
+  pagination: ListPaginationParams;
+}
+
+export async function Reviews({ reviews, pagination }: Props) {
   return (
     <div className="relative mx-auto max-w-[960px] gap-12 px-4 md:px-6">
-      <div className="sticky top-0 z-30 mb-6 flex border-b bg-white py-6">
-        <div className="mx-auto flex flex-1 flex-col gap-4">
-          <AIReviewSummary employer={employer} />
-          <AddReviewDialog employerId={employer._id} />
-        </div>
-      </div>
-
-      {/*<div key={review.id}>*/}
-      {/*  <ReviewView key={review.content} review={review} />*/}
-      {/*</div>*/}
+      <List
+        count={reviews.count}
+        pagination={pagination}
+        emptyStateProps={{ title: 'Fuck', imageSrc: '' }}
+      >
+        {reviews.rows.map((review) => (
+          <ReviewView key={review._id} review={review} />
+        ))}
+      </List>
     </div>
   );
 }
