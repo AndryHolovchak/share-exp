@@ -14,20 +14,33 @@ import { DialogBody } from 'next/dist/client/components/react-dev-overlay/intern
 import ReviewForm from '@/features/reviews/components/review-form';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ReviewFormValues } from '@/features/reviews/types';
+import useErrorHandler from '@/error-handling/use-error-handler';
+import EMPLOYERS_API from '@/features/employers/api';
 
 interface Props {
   employerId: string;
+  triggerClassName?: string;
 }
 
-export default function AddReviewDialog({ employerId }: Props) {
-  const [open, setOpen] = useState(false);
+export default function AddReviewDialog({
+  employerId,
+  triggerClassName,
+}: Props) {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
+
+  const createReview = useErrorHandler(async (review: ReviewFormValues) => {
+    await EMPLOYERS_API.createReview(employerId, review);
+    setOpen(false);
+    router.refresh();
+  });
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild onClick={() => setOpen(true)}>
-        <Button>
-          <MessageSquarePlus /> Додати відгук
+        <Button className={triggerClassName}>
+          <MessageSquarePlus /> Залишити Відгук
         </Button>
       </DialogTrigger>
       <DialogContent className="top-1/4">
@@ -36,13 +49,7 @@ export default function AddReviewDialog({ employerId }: Props) {
           <DialogDescription>Будь ласка, опишіть ваш досвід</DialogDescription>
         </DialogHeader>
         <DialogBody>
-          <ReviewForm
-            employerId={employerId}
-            onSuccess={() => {
-              setOpen(false);
-              router.refresh();
-            }}
-          />
+          <ReviewForm onSubmit={createReview} />
         </DialogBody>
       </DialogContent>
     </Dialog>

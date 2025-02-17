@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ReactNode } from 'react';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,6 +20,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="relative h-lvh flex-1">{children}</div>
+        <Toaster />
       </body>
     </html>
   );

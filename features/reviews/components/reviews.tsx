@@ -19,7 +19,7 @@ export async function Reviews({ reviews, pagination }: Props) {
         emptyStateProps={{ title: 'Fuck', imageSrc: '' }}
       >
         {reviews.rows.map((review) => (
-          <ReviewView key={review.content} review={review} />
+          <ReviewView key={review._id} review={review} />
         ))}
       </List>
     </div>
