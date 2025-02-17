@@ -4,6 +4,7 @@ import EmployerCard from '@/features/employers/components/employer-card';
 import { ListParams } from '@/types/list';
 import { List } from '@/components/ui/list';
 import { Frown } from 'lucide-react';
+import getIllustrationPath from '@/utils/get-illustration-path';
 
 export async function EmployersList(params: ListParams) {
   const employers = await EMPLOYERS_API.fetchAllEmployers(params);
@@ -13,7 +14,7 @@ export async function EmployersList(params: ListParams) {
       count={employers.count}
       pagination={params}
       emptyStateProps={{
-        imageSrc: '/illustrations/searching.png',
+        imageSrc: getIllustrationPath('searching'),
         title: (
           <>
             На жаль, я не знаю такого роботодавця <Frown />
