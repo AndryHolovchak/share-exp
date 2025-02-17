@@ -4,6 +4,8 @@ import { RatingView } from './rating-view/rating-view';
 import { Review } from '@/features/reviews/types';
 import { ListPaginationParams, ListResponse } from '@/types/list';
 import { List } from '@/components/ui/list';
+import { Annoyed } from 'lucide-react';
+import getIllustrationPath from '@/utils/get-illustration-path';
 
 interface Props {
   reviews: ListResponse<Review>;
@@ -16,7 +18,14 @@ export async function Reviews({ reviews, pagination }: Props) {
       <List
         count={reviews.count}
         pagination={pagination}
-        emptyStateProps={{ title: 'Fuck', imageSrc: '' }}
+        emptyStateProps={{
+          title: (
+            <>
+              На жаль, я нічого не знаю про цього роботодавця <Annoyed />
+            </>
+          ),
+          imageSrc: getIllustrationPath('searching-2'),
+        }}
       >
         {reviews.rows.map((review) => (
           <ReviewView key={review._id} review={review} />
