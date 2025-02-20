@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ReactNode } from 'react';
 import { Toaster } from '@/components/ui/toaster';
+import { AuthDialogProvider } from '@/auth/providers/auth-dialog-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +20,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="relative h-lvh flex-1">{children}</div>
+        <AuthDialogProvider>
+          <div className="relative h-lvh flex-1">{children}</div>
+        </AuthDialogProvider>
+
         <Toaster />
       </body>
     </html>
