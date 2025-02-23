@@ -1,6 +1,6 @@
 import { Provider } from 'next-auth/providers/index';
 import GoogleProvider from 'next-auth/providers/google';
-import { Session } from 'next-auth';
+import { NextAuthOptions } from 'next-auth';
 
 export const authProviders: Provider[] = [
   GoogleProvider({
@@ -17,6 +17,18 @@ export const authProviders: Provider[] = [
   }),
 ];
 
-export interface SessionWithIdToken extends Session {
-  idToken: string;
-}
+export const authOptions: NextAuthOptions = {
+  providers: authProviders,
+  callbacks: {
+    async jwt({ token, account }) {
+      if (account) {
+        token.id_token = account.id_token;
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      return { ...session, idToken: token.id_token };
+    },
+  },
+};

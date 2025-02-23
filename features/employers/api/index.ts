@@ -1,7 +1,7 @@
 import { Employer } from '@/features/employers/types';
-import { apiAction, apiFetch, apiGet } from '@/network/api-fetch';
 import { ListPaginationParams, ListParams, ListResponse } from '@/types/list';
 import { Review, ReviewFormValues } from '@/features/reviews/types';
+import { apiAction, apiGet } from '@/network/api-fetch';
 
 const EMPLOYERS_API = {
   fetchAllEmployers: async (params: ListParams) =>
