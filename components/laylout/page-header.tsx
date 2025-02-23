@@ -4,6 +4,9 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
+import UserMenu from '@/features/users/components/user-menu';
+import AuthGate from '@/auth/containers/auth-gate';
+import SignInButton from '@/auth/components/sign-in-button';
 
 interface Props {
   leftSlot?: ReactNode;
@@ -40,7 +43,15 @@ export function PageHeader({
         <div className="grid flex-1 grid-cols-[0.5fr_1fr_0.5fr] gap-2">
           <Slot>{leftSlot}</Slot>
           <Slot className="justify-center">{centralSlot}</Slot>
-          <Slot>{rightSlot}</Slot>
+          <Slot>
+            {rightSlot}
+            <div className="ml-auto">
+              <AuthGate
+                authenticated={<UserMenu />}
+                unauthenticated={<SignInButton />}
+              />
+            </div>
+          </Slot>
         </div>
       </Card>
     </header>

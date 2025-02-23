@@ -1,5 +1,7 @@
 import { API_URL } from '@/constants/config-global';
 import { enhancedFetch } from '@/network/enhanced-fetch';
+import { getSession } from 'next-auth/react';
+import { SessionWithIdToken } from '@/lib/next-auth';
 
 interface Config {
   searchParams?: Record<string, any>;
@@ -10,14 +12,17 @@ export async function apiFetch<Response>(
   endpoint: string,
   config?: Config
 ): Promise<Response> {
+  const session = await getSession();
+  const token = (session as SessionWithIdToken | null)?.idToken;
+
   const queryString = new URLSearchParams(
     (config?.searchParams || {}) as Record<string, string>
   ).toString();
 
-  const response = await enhancedFetch(
-    `${API_URL}${endpoint}?${queryString}`,
-    config?.options
-  );
+  const response = await enhancedFetch(`${API_URL}${endpoint}?${queryString}`, {
+    ...config?.options,
+    headers: { ...config?.options?.headers, Authorization: `Bearer ${token}` },
+  });
   return response.json();
 }
 

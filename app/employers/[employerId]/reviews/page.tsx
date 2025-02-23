@@ -6,7 +6,7 @@ import { PageContent } from '@/components/laylout/page-content';
 import { EmployerReviews } from '@/features/employers/containers/employer-reviews';
 import { ListPaginationParams } from '@/types/list';
 import { normalizeListPaginationParams } from '@/utils/normalize-list-pagination-params';
-import AddReviewDialog from '@/features/reviews/components/add-review-dialog';
+import AddReviewButton from '@/features/reviews/components/add-review-button';
 
 type Props = NextPageProps<{ employerId: string }, ListPaginationParams>;
 
@@ -23,10 +23,7 @@ export default async function ProductPage({ params, searchParams }: Props) {
         leftSlot={<EmployerBaseInfo employer={employer} />}
       />
       <PageContent>
-        <AddReviewDialog
-          employerId={employerId}
-          triggerClassName="w-full mb-8"
-        />
+        <AddReviewButton employerId={employerId} className="mb-8 w-full" />
         <EmployerReviews
           employerId={employerId}
           pagination={normalizeListPaginationParams(pagination)}
