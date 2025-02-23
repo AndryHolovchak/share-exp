@@ -1,4 +1,4 @@
-import { ResponseError } from '@/network/erorrs';
+import { ResponseError } from '@/network/response-error';
 
 export async function enhancedFetch(...params: Parameters<typeof fetch>) {
   const response = await fetch(...params);

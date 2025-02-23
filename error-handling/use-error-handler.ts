@@ -1,4 +1,4 @@
-import extractErrorMessage from '@/error-handling/utils';
+import getErrorMessage from '@/error-handling/utils';
 import { useToast } from '@/hooks/use-toast';
 
 export default function useErrorHandler<
@@ -14,7 +14,7 @@ export default function useErrorHandler<
       toast({
         variant: 'destructive',
         title: 'Щось пішло нет так :(',
-        description: extractErrorMessage(error as Error),
+        description: getErrorMessage(error as Error),
       });
     }
   };

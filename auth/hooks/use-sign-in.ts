@@ -9,11 +9,9 @@ export default function useSignIn() {
 
   const signIn = (provider: AvailableSignInProvider) => {
     signInWindowRef.current = window.open(
-      `start-sign-in-flow?provider=${provider}`,
+      `/start-sign-in-flow?provider=${provider}`,
       '_blank'
     );
-
-    signInWindowRef.current?.focus();
   };
 
   // Close the sign-in window after the user has signed in

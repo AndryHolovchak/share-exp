@@ -1,5 +1,6 @@
 import { Provider } from 'next-auth/providers/index';
 import GoogleProvider from 'next-auth/providers/google';
+import { Session } from 'next-auth';
 
 export const authProviders: Provider[] = [
   GoogleProvider({
@@ -15,3 +16,7 @@ export const authProviders: Provider[] = [
     },
   }),
 ];
+
+export interface SessionWithIdToken extends Session {
+  idToken: string;
+}
