@@ -1,6 +1,6 @@
-import { AuthDialogConfig } from '@/auth/providers/auth-dialog-provider/types';
+import { RequiredSignInModalConfig } from '@/auth/providers/required-sign-in-modal-provider/types';
 
-export const ADD_REVIEW_AUTH_DIALOG_CONFIG: AuthDialogConfig = {
+export const ADD_REVIEW_SIGN_IN_MODAL_CONFIG: RequiredSignInModalConfig = {
   description: (
     <span>
       Ви все-одно зможете залишити відгук{' '}

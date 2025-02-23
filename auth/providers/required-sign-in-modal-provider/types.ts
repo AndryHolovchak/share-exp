@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
 
-export interface AuthDialogConfig {
+export interface RequiredSignInModalConfig {
   description?: ReactNode;
 }

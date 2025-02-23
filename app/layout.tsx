@@ -3,7 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ReactNode } from 'react';
 import { Toaster } from '@/components/ui/toaster';
-import { AuthDialogProvider } from '@/auth/providers/auth-dialog-provider';
+import { RequiredSignInModalProvider } from '@/auth/providers/required-sign-in-modal-provider';
+import SessionProvider from '@/auth/providers/session-provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,11 +21,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthDialogProvider>
-          <div className="relative h-lvh flex-1">{children}</div>
-        </AuthDialogProvider>
-
-        <Toaster />
+        <SessionProvider>
+          <RequiredSignInModalProvider>
+            <Toaster />
+            <div className="relative h-lvh flex-1">{children}</div>
+          </RequiredSignInModalProvider>
+        </SessionProvider>
       </body>
     </html>
   );
