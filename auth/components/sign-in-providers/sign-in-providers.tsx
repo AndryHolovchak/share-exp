@@ -1,8 +1,12 @@
 import { SIGN_IN_PROVIDERS_CONFIG } from '@/auth/components/sign-in-providers/config';
 import { Button } from '@/components/ui/button';
-import { signIn } from 'next-auth/react';
+import { AvailableSignInProvider } from '@/auth/components/sign-in-providers/types';
 
-export default function SignInProviders() {
+interface Props {
+  onSelect: (provider: AvailableSignInProvider) => void;
+}
+
+export default function SignInProviders({ onSelect }: Props) {
   return (
     <div className="flex items-center gap-2">
       <span className="text-muted-foreground">Увійти за допомогою</span>
@@ -11,7 +15,7 @@ export default function SignInProviders() {
           key={provider}
           size="icon"
           className="bg-transparent"
-          onClick={() => signIn(provider)}
+          onClick={() => onSelect(provider)}
         >
           <Icon />
         </Button>
