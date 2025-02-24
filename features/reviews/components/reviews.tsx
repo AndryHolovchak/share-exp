@@ -40,13 +40,13 @@ export function ReviewView({ review }: { review: Review }) {
   return (
     <div className="flex gap-4">
       <Avatar className="h-10 w-10 border">
-        <AvatarImage alt="@shadcn" src="/placeholder-user.jpg" />
-        <AvatarFallback>CN</AvatarFallback>
+        <AvatarImage alt="@shadcn" src={review.author.picture} />
+        <AvatarFallback>?</AvatarFallback>
       </Avatar>
       <div className="grid gap-1">
         <div className="flex items-start gap-2">
           <div className="grid gap-0.5 text-sm">
-            <h3 className="font-semibold">{review.authorName}</h3>
+            <h3 className="font-semibold">{review.author.name}</h3>
             <time
               className="text-sm text-gray-500 dark:text-gray-400"
               suppressHydrationWarning
@@ -58,7 +58,7 @@ export function ReviewView({ review }: { review: Review }) {
             <RatingView rating={review.rating} />
           </div>
         </div>
-        <div className="text-sm leading-loose text-gray-500 dark:text-gray-400">
+        <div className="text-sm leading-loose text-primary dark:text-gray-400">
           <p>{review.content}</p>
         </div>
       </div>

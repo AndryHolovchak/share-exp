@@ -11,10 +11,10 @@ async function pickSession() {
 
   try {
     session = await getServerSession(authOptions);
-    console.log({ serverSessionHasToken: !!session?.idToken });
+    console.log({ serverSessionToken: session?.idToken });
   } catch {
     session = (await getSession()) as SessionWithIdToken;
-    console.log({ clientSessionHasToken: !!session?.idToken });
+    console.log({ clientSessionToken: session?.idToken });
   }
 
   return session;

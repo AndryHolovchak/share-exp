@@ -1,3 +1,5 @@
+import { UserBase } from '@/features/users/types';
+
 export type Rating = 1 | 2 | 3 | 4 | 5;
 
 export interface Review {
@@ -5,7 +7,7 @@ export interface Review {
   content: string;
   rating: Rating;
   createdAt: string;
-  authorName: string;
+  author: UserBase;
 }
 
 export interface ReviewFormValues {
