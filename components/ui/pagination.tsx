@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { ListPaginationParams } from '@/types/list';
+import { useEffect } from 'react';
 
 interface Props extends Required<ListPaginationParams> {
   count: number;
@@ -18,6 +19,14 @@ export function Pagination({ count, page, limit }: Props) {
   const goToPage = (page: number) => {
     router.push(`?page=${page}`);
   };
+
+  useEffect(() => {
+    if (page > Math.ceil(count / limit)) {
+      goToPage(1);
+    }
+  }, [count, page, limit]);
+
+  if (count <= limit) return null;
 
   return (
     <div className="mt-6 flex items-center justify-end gap-2">

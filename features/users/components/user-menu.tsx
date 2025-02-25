@@ -4,9 +4,12 @@ import Image from 'next/image';
 import { signOut, useSession } from 'next-auth/react';
 import DropdownMenu from '@/components/ui/dropdown-menu';
 import { CircleUserRound } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
 
 export default function UserMenu() {
   const { data } = useSession();
+  const router = useRouter();
 
   const user = data?.user;
 
@@ -15,7 +18,7 @@ export default function UserMenu() {
   return (
     <DropdownMenu
       trigger={
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <span className="text-sm">{user.name}</span>
           {user.image ? (
             <Image
@@ -31,6 +34,10 @@ export default function UserMenu() {
         </div>
       }
       options={[
+        {
+          content: 'Мої відгуки',
+          onClick: () => router.push(ROUTES.MY_REVIEWS),
+        },
         {
           content: <span className="text-destructive">Вийти</span>,
           onClick: signOut,

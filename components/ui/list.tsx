@@ -19,7 +19,7 @@ export function List({ children, count, pagination, emptyStateProps }: Props) {
         {children}
         {isEmpty && <EmptyState {...emptyStateProps} />}
       </div>
-      {count > pagination.limit && <Pagination count={count} {...pagination} />}
+      <Pagination count={count} {...pagination} />
     </div>
   );
 }

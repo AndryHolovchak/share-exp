@@ -30,7 +30,7 @@ export function PageHeader({
   backButtonHref,
 }: Props) {
   return (
-    <header className="sticky top-0">
+    <header className="sticky top-0 z-10">
       <Card className="mb-8 flex items-center rounded-none p-6">
         {withBackButton && (
           <Link href={backButtonHref ?? './'}>
