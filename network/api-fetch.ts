@@ -1,20 +1,17 @@
 import { API_URL } from '@/constants/config-global';
 import { FetchConfig } from '@/network/types';
 import { ResponseError } from '@/network/response-error';
-import { getServerSession } from 'next-auth';
-import { SessionWithIdToken } from '@/lib/next-auth/types';
+import { getServerSession, Session } from 'next-auth';
 import { getSession } from 'next-auth/react';
 import { authOptions } from '@/lib/next-auth';
 
 async function pickSession() {
-  let session: SessionWithIdToken | null = null;
+  let session: Session | null = null;
 
   try {
     session = await getServerSession(authOptions);
-    console.log({ serverSessionToken: session?.idToken });
   } catch {
-    session = (await getSession()) as SessionWithIdToken;
-    console.log({ clientSessionToken: session?.idToken });
+    session = (await getSession()) as Session;
   }
 
   return session;
@@ -32,9 +29,10 @@ export async function apiFetch<Response>(
 
   const response = await fetch(`${API_URL}${endpoint}?${queryString}`, {
     ...config?.options,
+    credentials: 'include',
     headers: {
       ...config?.options?.headers,
-      Authorization: session?.idToken ? `Bearer ${session.idToken}` : '',
+      Authorization: session?.id_token ? `Bearer ${session.id_token}` : '',
     },
   });
 
