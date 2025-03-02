@@ -26,7 +26,9 @@ export async function apiFetch<Response>(
   ).toString();
 
   const session = await pickSession();
-  console.log(session.id_token);
+
+  // console.log(session?.id_token);
+
   const response = await fetch(`${API_URL}${endpoint}?${queryString}`, {
     ...config?.options,
     credentials: 'include',

@@ -7,12 +7,15 @@ export interface Review {
   _id: string;
   content: string;
   rating: Rating;
+  anonymous: boolean;
   createdAt: string;
-  author: UserBase;
+  author?: UserBase;
   employer?: Employer;
+  isCurrentUserReview: boolean;
 }
 
 export interface ReviewFormValues {
   rating: Rating;
   content: string;
+  anonymous: boolean;
 }
