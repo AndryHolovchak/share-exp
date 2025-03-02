@@ -19,10 +19,6 @@ export default function EmployerCard({ employer, className }: Props) {
       <CardHeader>
         <div className="flex justify-between">
           <EmployerBaseInfo employer={employer} />
-          <div className="flex-0 flex h-fit items-center gap-1 text-muted-foreground">
-            <EyeIcon width={18} />
-            {employer.totalViews}
-          </div>
         </div>
       </CardHeader>
       <CardContent>

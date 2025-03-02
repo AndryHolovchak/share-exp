@@ -1,7 +1,7 @@
 import { UserBase } from '@/features/users/types';
 import { Employer } from '@/features/employers/types';
 
-export type Rating = 1 | 2 | 3 | 4 | 5;
+export type Rating = 0 | 1 | 2 | 3 | 4 | 5;
 
 export interface Review {
   _id: string;

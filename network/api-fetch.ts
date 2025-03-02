@@ -25,8 +25,8 @@ export async function apiFetch<Response>(
     (config?.searchParams || {}) as Record<string, string>
   ).toString();
 
-  let session = await pickSession();
-
+  const session = await pickSession();
+  console.log(session.id_token);
   const response = await fetch(`${API_URL}${endpoint}?${queryString}`, {
     ...config?.options,
     credentials: 'include',
