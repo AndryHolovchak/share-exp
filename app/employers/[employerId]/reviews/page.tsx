@@ -15,6 +15,10 @@ export default async function ProductPage({ params, searchParams }: Props) {
   const pagination = await searchParams;
   const employer = await EMPLOYERS_API.fetchEmployerById(employerId);
 
+  if (!employer) {
+    return <div>404</div>;
+  }
+
   return (
     <div>
       <PageHeader

@@ -4,13 +4,12 @@ import { RatingView } from '@/features/reviews/components/rating-view/rating-vie
 import ms from 'ms';
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
+import ReviewVoteControls from '@/features/reviews/components/review-vote-controls';
 
 interface Props {
   review: Review;
 }
 export default function ReviewView({ review }: Props) {
-  console.log(review);
-
   const renderAuthorName = () => {
     if (review.anonymous) {
       return `Анонімно${review.isCurrentUserReview ? ' (Ви)' : ''}`;
@@ -50,6 +49,7 @@ export default function ReviewView({ review }: Props) {
               </Link>
             </>
           )}
+          <ReviewVoteControls className="ml-4" review={review} />
         </div>
         <div className="text-sm leading-loose text-primary dark:text-gray-400">
           <p>{review.content}</p>

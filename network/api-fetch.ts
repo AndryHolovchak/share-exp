@@ -20,14 +20,14 @@ async function pickSession() {
 export async function apiFetch<Response>(
   endpoint: string,
   config?: FetchConfig
-): Promise<Response> {
+): Promise<Response | null> {
   const queryString = new URLSearchParams(
     (config?.searchParams || {}) as Record<string, string>
   ).toString();
 
   const session = await pickSession();
 
-  // console.log(session?.id_token);
+  console.log(session?.id_token);
 
   const response = await fetch(`${API_URL}${endpoint}?${queryString}`, {
     ...config?.options,
@@ -43,14 +43,19 @@ export async function apiFetch<Response>(
     throw new ResponseError(response.statusText, body);
   }
 
-  return response.json();
+  try {
+    const json = await response.json();
+    return json;
+  } catch {
+    return null;
+  }
 }
 
 export async function apiGet<Response>(
   endpoint: string,
   searchParams?: FetchConfig['searchParams'],
   options?: FetchConfig['options']
-): Promise<Response> {
+): Promise<Response | null> {
   return apiFetch(endpoint, { searchParams, options });
 }
 
@@ -61,7 +66,7 @@ export async function apiAction<Response>(
     method?: 'POST' | 'PUT' | 'DELETE';
     options?: FetchConfig['options'];
   }
-): Promise<Response> {
+): Promise<Response | null> {
   const { body, method = 'POST', options } = config;
   return apiFetch(endpoint, {
     options: {

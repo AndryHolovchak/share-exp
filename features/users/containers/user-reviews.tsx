@@ -9,5 +9,9 @@ interface Props {
 export async function UserReviews({ pagination }: Props) {
   const reviews = await USER_API.fetchReviews(pagination);
 
+  if (!reviews) {
+    return <div>404</div>;
+  }
+  console.log({ reviews });
   return <Reviews reviews={reviews} pagination={pagination} />;
 }
