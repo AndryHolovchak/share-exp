@@ -11,13 +11,9 @@ export default function SignInProviders({ onSelect }: Props) {
     <div className="flex items-center gap-2">
       <span className="text-muted-foreground">Увійти за допомогою</span>
       {SIGN_IN_PROVIDERS_CONFIG.map(({ provider, Icon }) => (
-        <Button
-          key={provider}
-          size="icon"
-          className="bg-transparent"
-          onClick={() => onSelect(provider)}
-        >
+        <Button size="sm" key={provider} onClick={() => onSelect(provider)}>
           <Icon />
+          Google
         </Button>
       ))}
     </div>
