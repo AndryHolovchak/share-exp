@@ -7,6 +7,8 @@ import { EmployerReviews } from '@/features/employers/containers/employer-review
 import { ListPaginationParams } from '@/types/list';
 import { normalizeListPaginationParams } from '@/utils/normalize-list-pagination-params';
 import AddReviewButton from '@/features/reviews/components/add-review-button';
+import { redirect, RedirectType } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
 
 type Props = NextPageProps<{ employerId: string }, ListPaginationParams>;
 
@@ -16,7 +18,7 @@ export default async function ProductPage({ params, searchParams }: Props) {
   const employer = await EMPLOYERS_API.fetchEmployerById(employerId);
 
   if (!employer) {
-    return <div>404</div>;
+    return redirect(ROUTES.EMPLOYERS(), RedirectType.replace);
   }
 
   return (

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { ListPaginationParams } from '@/types/list';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 interface Props extends Required<ListPaginationParams> {
   count: number;
@@ -16,15 +16,21 @@ export function Pagination({ count, page, limit }: Props) {
   const from = Math.min(Math.max(1, (page - 1) * limit), count);
   const to = Math.min((page - 1) * limit + limit, count);
 
-  const goToPage = (page: number) => {
-    router.push(`?page=${page}`);
-  };
+  const goToPage = useCallback(
+    (page: number) => {
+      router.push(`?page=${page}`);
+    },
+    [router]
+  );
 
   useEffect(() => {
-    if (page > Math.ceil(count / limit)) {
+    const maxPage = Math.ceil(count / limit);
+
+    if (maxPage && page > maxPage) {
+      console.log(Math.ceil(count / limit));
       goToPage(1);
     }
-  }, [count, page, limit]);
+  }, [count, page, limit, goToPage]);
 
   if (count <= limit) return null;
 
