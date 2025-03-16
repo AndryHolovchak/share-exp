@@ -5,6 +5,7 @@ import ms from 'ms';
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
 import ReviewVoteControls from '@/features/reviews/components/review-vote-controls';
+import EditorValue from '@/components/ui/lexical/components/editor-value';
 
 interface Props {
   review: Review;
@@ -52,7 +53,7 @@ export default function ReviewView({ review }: Props) {
           <ReviewVoteControls className="ml-4" review={review} />
         </div>
         <div className="text-sm leading-loose text-primary dark:text-gray-400">
-          <p>{review.content}</p>
+          <EditorValue value={review.content} />
         </div>
       </div>
     </div>

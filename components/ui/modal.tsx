@@ -6,7 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { DialogBody } from 'next/dist/client/components/react-dev-overlay/internal/components/Dialog';
 
 export interface ModalBaseProps {
   open: boolean;
@@ -17,6 +16,7 @@ interface Props extends ModalBaseProps {
   title?: ReactNode;
   description?: ReactNode;
   content?: ReactNode;
+  className?: string;
 }
 
 export default function Modal({
@@ -25,15 +25,16 @@ export default function Modal({
   title,
   description,
   content,
+  className,
 }: Props) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="top-1/4">
+      <DialogContent className={className}>
         <DialogHeader>
           {title && <DialogTitle>{title}</DialogTitle>}
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
-        {content && <DialogBody>{content}</DialogBody>}
+        {content && <div>{content}</div>}
       </DialogContent>
     </Dialog>
   );

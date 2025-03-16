@@ -17,11 +17,13 @@ export default function Page() {
         break;
       }
       case 'unauthenticated': {
-        provider && void signIn(provider);
+        if (provider) {
+          void signIn(provider);
+        }
         break;
       }
     }
-  }, [session, status]);
+  }, [provider, session, status]);
 
   return (
     <div className="flex h-[100vh] w-[100vw] items-center justify-center">

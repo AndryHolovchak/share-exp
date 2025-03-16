@@ -27,6 +27,7 @@ export default function AddReviewModal({ employerId, ...modal }: Props) {
       title="Відгук"
       description="Будь ласка, опишіть ваш досвід"
       content={<ReviewForm onSubmit={createReview} />}
+      className="max-w-[840px]"
     />
   );
 }

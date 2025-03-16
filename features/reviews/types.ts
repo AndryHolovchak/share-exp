@@ -7,6 +7,7 @@ export type ReviewVote = -1 | 1;
 
 export interface Review {
   _id: string;
+  // Editor state
   content: string;
   rating: Rating;
   anonymous: boolean;

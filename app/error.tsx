@@ -6,7 +6,11 @@ import { EmptyState } from '@/components/ui/empty-state';
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
 
-export default function Error(props: any) {
+interface Props {
+  error?: Error;
+}
+
+export default function Error({ error }: Props) {
   return (
     <div className="flex h-[100vh] flex-col items-center justify-center">
       <EmptyState
@@ -19,7 +23,7 @@ export default function Error(props: any) {
         }
         description={
           <div className="flex flex-col items-center gap-2">
-            <span className="text-red-600">{props.error?.message}</span>
+            <span className="text-red-600">{error?.message}</span>
             <Link
               href={ROUTES.EMPLOYERS()}
               className="text-xl font-medium text-blue-600 underline"
