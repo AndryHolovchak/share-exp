@@ -12,7 +12,10 @@ import { ROUTES } from '@/constants/routes';
 
 type Props = NextPageProps<{ employerId: string }, ListPaginationParams>;
 
-export default async function ProductPage({ params, searchParams }: Props) {
+export default async function EmployerReviewsPage({
+  params,
+  searchParams,
+}: Props) {
   const { employerId } = await params;
   const pagination = await searchParams;
   const employer = await EMPLOYERS_API.fetchEmployerById(employerId);

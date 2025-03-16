@@ -4,9 +4,10 @@ import { ReactNode } from 'react';
 export interface EmptyStateProps {
   imageSrc: string;
   title: ReactNode;
+  description?: ReactNode;
 }
 
-export function EmptyState({ title, imageSrc }: EmptyStateProps) {
+export function EmptyState({ title, description, imageSrc }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <Image
@@ -16,10 +17,11 @@ export function EmptyState({ title, imageSrc }: EmptyStateProps) {
         width={400}
         height={400}
       />
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center gap-2">
         <span className="inline-flex items-center gap-2 text-xl font-medium text-muted-foreground">
           {title}
         </span>
+        <div>{description}</div>
       </div>
     </div>
   );
