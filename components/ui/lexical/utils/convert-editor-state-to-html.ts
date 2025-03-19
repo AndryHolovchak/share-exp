@@ -1,5 +1,5 @@
 import { createEditor } from 'lexical';
-import { EDITOR_NODES } from '@/components/ui/lexical/Editor';
+import { EDITOR_NODES } from '@/components/ui/lexical/editor';
 import editorTheme from '@/components/ui/lexical/theme';
 import { $generateHtmlFromNodes } from '@lexical/html';
 

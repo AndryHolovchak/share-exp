@@ -1,2 +1,2 @@
-import Editor from '@/components/ui/lexical/Editor';
+import Editor from '@/components/ui/lexical/editor';
 export default Editor;

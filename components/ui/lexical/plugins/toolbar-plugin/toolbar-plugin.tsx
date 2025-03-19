@@ -83,27 +83,9 @@ export default function ToolbarPlugin() {
 
   return (
     <div
-      className="sticky top-0 flex w-full flex-wrap gap-2 border-b p-4"
+      className="sticky top-0 flex w-full flex-wrap gap-1 border-b p-1"
       ref={toolbarRef}
     >
-      <ToolbarButton
-        size="icon"
-        disabled={!canUndo}
-        onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
-        className="toolbar-item spaced"
-        aria-label="Undo"
-      >
-        <UndoIcon />
-      </ToolbarButton>
-      <ToolbarButton
-        size="icon"
-        disabled={!canRedo}
-        onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
-        className="toolbar-item"
-        aria-label="Redo"
-      >
-        <RedoIcon />
-      </ToolbarButton>
       <ToolbarButton
         active={isBold}
         onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold')}
@@ -133,32 +115,6 @@ export default function ToolbarPlugin() {
         aria-label="Format Strikethrough"
       >
         <s>S</s>
-      </ToolbarButton>
-      <ToolbarButton
-        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left')}
-        aria-label="Left Align"
-      >
-        <AlignLeftIcon />
-      </ToolbarButton>
-      <ToolbarButton
-        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center')}
-        aria-label="Center Align"
-      >
-        <AlignCenterIcon />
-      </ToolbarButton>
-      <ToolbarButton
-        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right')}
-        aria-label="Right Align"
-      >
-        <AlignRightIcon />
-      </ToolbarButton>
-      <ToolbarButton
-        onClick={() =>
-          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify')
-        }
-        aria-label="Justify Align"
-      >
-        <AlignJustifyIcon />
       </ToolbarButton>
     </div>
   );

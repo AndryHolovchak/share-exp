@@ -4,7 +4,7 @@ import { ReviewFormValues } from '@/features/reviews/types';
 import RatingInput from '@/features/reviews/components/rating-input';
 import { Button } from '@/components/ui/button';
 import CheckboxField from '@/components/fields/checkbox-field';
-import Editor from '@/components/ui/lexical/Editor';
+import Editor from '@/components/ui/lexical/editor';
 
 function SubmitButton({ disabled }: { disabled: boolean }) {
   const formStatus = useFormStatus();
