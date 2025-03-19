@@ -1,27 +1,35 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
-import { ReviewFormValues } from '@/features/reviews/types';
+import { ReviewContent } from '@/features/reviews/types';
 import RatingInput from '@/features/reviews/components/rating-input';
 import { Button } from '@/components/ui/button';
 import CheckboxField from '@/components/fields/checkbox-field';
 import Editor from '@/components/ui/lexical/editor';
 
-function SubmitButton({ disabled }: { disabled: boolean }) {
+function SubmitButton() {
   const formStatus = useFormStatus();
 
-  return <Button disabled={disabled || formStatus.pending}>Додати</Button>;
+  return <Button disabled={formStatus.pending}>Додати</Button>;
 }
 
-interface Props {
-  onSubmit: (review: ReviewFormValues) => void;
+const DEFAULT_VALUES: ReviewContent = {
+  rating: 4,
+  content: '',
+  anonymous: false,
+};
+
+export interface ReviewFormProps {
+  defaultValues?: ReviewContent;
+  onSubmit: (review: ReviewContent) => void;
 }
 
-export default function ReviewForm({ onSubmit }: Props) {
-  const [formValues, setFormValues] = useState<ReviewFormValues>({
-    rating: 4,
-    content: '',
-    anonymous: false,
-  });
+export default function ReviewForm({
+  onSubmit,
+  defaultValues,
+}: ReviewFormProps) {
+  const [formValues, setFormValues] = useState<ReviewContent>(
+    defaultValues || DEFAULT_VALUES
+  );
 
   return (
     <form className="flex flex-col gap-3" action={() => onSubmit(formValues)}>
@@ -37,9 +45,10 @@ export default function ReviewForm({ onSubmit }: Props) {
         onChange={(rating) => setFormValues({ ...formValues, rating })}
       />
       <Editor
+        initialValue={formValues.content}
         onChange={(value) => setFormValues({ ...formValues, content: value })}
       />
-      <SubmitButton disabled={!formValues.content.trim()} />
+      <SubmitButton />
     </form>
   );
 }

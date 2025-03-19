@@ -5,22 +5,19 @@ export type Rating = 0 | 1 | 2 | 3 | 4 | 5;
 
 export type ReviewVote = -1 | 1;
 
-export interface Review {
-  _id: string;
-  // Editor state
-  content: string;
+export interface ReviewContent {
   rating: Rating;
+  // Editor state
+  content?: string;
   anonymous: boolean;
+}
+
+export interface Review extends ReviewContent {
+  _id: string;
   createdAt: string;
   author?: UserBase;
   employer?: Employer;
   voteRating: number;
   isCurrentUserReview: boolean;
   currentUserVote: ReviewVote | null;
-}
-
-export interface ReviewFormValues {
-  rating: Rating;
-  content: string;
-  anonymous: boolean;
 }

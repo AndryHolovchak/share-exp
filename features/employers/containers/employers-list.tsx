@@ -11,7 +11,7 @@ export async function EmployersList(params: ListParams) {
 
   return (
     <List
-      count={employers.count}
+      count={employers?.count || 0}
       pagination={params}
       emptyStateProps={{
         imageSrc: getIllustrationPath('searching'),
@@ -22,7 +22,7 @@ export async function EmployersList(params: ListParams) {
         ),
       }}
     >
-      {employers.rows.map((employer) => (
+      {employers?.rows.map((employer) => (
         <Link href={`/employers/${employer._id}/reviews`} key={employer._id}>
           <EmployerCard employer={employer} />
         </Link>

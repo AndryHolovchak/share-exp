@@ -13,5 +13,7 @@ export async function EmployerReviews({ employerId, pagination }: Props) {
     pagination
   );
 
+  if (!reviews) return null;
+
   return <Reviews reviews={reviews} pagination={pagination} />;
 }

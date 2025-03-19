@@ -12,13 +12,16 @@ export default function InitialValuePlugin({ value }: Props) {
   const editorRef = useRef(editor);
   editorRef.current = editor;
 
+  const valueRef = useRef(value);
+  valueRef.current = value;
+
   useEffect(() => {
-    if (value) {
+    if (valueRef.current) {
       editorRef.current.setEditorState(
-        editorRef.current.parseEditorState(value)
+        editorRef.current.parseEditorState(valueRef.current)
       );
     }
-  }, [value]);
+  }, []);
 
   return null;
 }

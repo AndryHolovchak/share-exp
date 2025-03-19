@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
 import ReviewVoteControls from '@/features/reviews/components/review-vote-controls';
 import EditorValue from '@/components/ui/lexical/components/editor-value';
+import ReviewActions from '@/features/reviews/components/review-actions';
 
 interface Props {
   review: Review;
@@ -52,9 +53,12 @@ export default function ReviewView({ review }: Props) {
           )}
           <ReviewVoteControls className="ml-4" review={review} />
         </div>
-        <div className="text-sm leading-loose text-primary dark:text-gray-400">
-          <EditorValue value={review.content} />
-        </div>
+        {review.content && (
+          <div className="text-sm leading-loose text-primary dark:text-gray-400">
+            <EditorValue value={review.content} />
+          </div>
+        )}
+        {review.isCurrentUserReview && <ReviewActions review={review} />}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { Employer } from '@/features/employers/types';
 import { ListPaginationParams, ListParams, ListResponse } from '@/types/list';
-import { Review, ReviewFormValues } from '@/features/reviews/types';
+import { Review, ReviewContent } from '@/features/reviews/types';
 import { apiAction, apiGet } from '@/network/api-fetch';
 
 const EMPLOYERS_API = {
@@ -12,9 +12,22 @@ const EMPLOYERS_API = {
   fetchEmployerReviews: async (id: string, params: ListPaginationParams) =>
     apiGet<ListResponse<Review>>(`/employers/${id}/reviews`, params),
 
-  createReview: async (id: string, body: ReviewFormValues) =>
+  createReview: async (id: string, body: ReviewContent) =>
     apiAction<ListResponse<Review>>(`/employers/${id}/reviews`, {
       body,
+    }),
+
+  editReview: async (
+    id: string,
+    { rating, content, anonymous }: ReviewContent
+  ) =>
+    apiAction(`/employers/reviews/${id}`, {
+      body: {
+        rating,
+        content,
+        anonymous,
+      },
+      method: 'PUT',
     }),
 };
 
