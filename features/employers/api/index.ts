@@ -29,6 +29,11 @@ const EMPLOYERS_API = {
       },
       method: 'PUT',
     }),
+
+  deleteReview: async (id: string) =>
+    apiAction(`/employers/reviews/${id}`, {
+      method: 'DELETE',
+    }),
 };
 
 export default EMPLOYERS_API;
