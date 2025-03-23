@@ -5,7 +5,6 @@ import {
   CardDescription,
   CardHeader,
 } from '@/components/ui/card';
-import { EyeIcon } from 'lucide-react';
 import { EmployerBaseInfo } from '@/features/employers/components/employer-base-info';
 
 interface Props {
@@ -22,7 +21,9 @@ export default function EmployerCard({ employer, className }: Props) {
         </div>
       </CardHeader>
       <CardContent>
-        <CardDescription>{employer.description}</CardDescription>
+        <CardDescription
+          dangerouslySetInnerHTML={{ __html: employer.shortDescriptionHtml }}
+        ></CardDescription>
       </CardContent>
     </Card>
   );
