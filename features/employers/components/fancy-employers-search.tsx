@@ -12,10 +12,7 @@ interface Props {
 
 export default function FancyEmployersSearch({ employers }: Props) {
   const employerNames = useMemo(
-    () => [
-      ...shuffleArray(employers.map(({ name }) => name)),
-      'Знайди свого роботодавця',
-    ],
+    () => [...shuffleArray(employers.map(({ name }) => name)), 'Роботодавець'],
     [employers]
   );
 
