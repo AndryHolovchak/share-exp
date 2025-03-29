@@ -1,31 +1,70 @@
-import { Employer } from '@/features/employers/types';
+import { Employer, EmployerDetails } from '@/features/employers/types';
 import Image from 'next/image';
 import { RatingView } from '@/features/reviews/components/rating-view/rating-view';
+import { Link1Icon } from '@radix-ui/react-icons';
+import { InfoIcon, LinkIcon } from 'lucide-react';
+import DataItemList, {
+  DataItemListConfig,
+} from '@/components/ui/data-item-list';
+import LinkButton from '@/components/ui/link-button';
 
 interface Props {
   employer: Pick<
     Employer,
-    'name' | 'averageRating' | 'totalReviews' | 'logoUrl'
+    | 'name'
+    | 'averageRating'
+    | 'totalReviews'
+    | 'logoUrl'
+    | 'website'
+    | 'categoryDescription'
   >;
 }
 
+const DATA_ITEM_LIST_CONFIG: DataItemListConfig<
+  Pick<EmployerDetails, 'website' | 'categoryDescription'>
+> = [
+  {
+    key: 'website',
+    className: 'cursor-pointer text-sky-500 w-fit',
+    icon: <LinkIcon />,
+    render: ({ website }) => (
+      <LinkButton href={website} target="_blank" className="h-fit text-inherit">
+        Сайт
+      </LinkButton>
+    ),
+  },
+  {
+    className: 'text-slate-500',
+    key: 'categoryDescription',
+    icon: <InfoIcon />,
+  },
+];
+
 export function EmployerBaseInfo({ employer }: Props) {
   return (
-    <div className="flex items-start gap-4">
+    <div className="flex w-full justify-between">
+      <div className="flex flex-col gap-1">
+        <b>{employer.name}</b>
+        <RatingView
+          rating={employer.averageRating}
+          count={employer.totalReviews}
+        />
+        <DataItemList
+          data={employer}
+          config={DATA_ITEM_LIST_CONFIG}
+          className="mt-1"
+        />
+      </div>
       {employer.logoUrl && (
         <Image
+          unoptimized
           src={employer.logoUrl}
-          width={96}
-          height={96}
+          width={100}
+          height={50}
           alt="logo"
-          className="rounded"
+          className="h-[50px] w-[100px]"
         />
       )}
-      <div className="flex items-center gap-2">
-        <span>{employer.name}</span>
-        <RatingView rating={employer.averageRating} />
-        <span>({employer.totalReviews})</span>
-      </div>
     </div>
   );
 }

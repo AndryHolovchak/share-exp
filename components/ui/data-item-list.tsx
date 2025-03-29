@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 
 interface Item<Data> {
   key: keyof Data;
+  className?: string;
   icon: DataItemConfig['icon'];
   render?: (value: Data) => DataItemConfig['value'];
 }
@@ -21,11 +22,12 @@ export default function DataItemList<Data>({
   className,
 }: Props<Data>) {
   return (
-    <div className={cn('flex flex-col', className)}>
-      {config.map(({ key, icon, render }) => (
+    <div className={cn('flex flex-col gap-0.5', className)}>
+      {config.map(({ key, icon, render, className }) => (
         <DataItem
           key={key.toString()}
           icon={icon}
+          className={className}
           value={render ? render(data) : data[key]?.toString()}
         />
       ))}

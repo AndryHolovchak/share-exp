@@ -15,6 +15,8 @@ export default function LinkButton({
   ...props
 }: Props) {
   const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.preventDefault();
+
     if (href) {
       window.open(href, target);
     } else if (onClick) {

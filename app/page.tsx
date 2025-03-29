@@ -1,7 +1,7 @@
 import { PageContent } from '@/components/laylout/page-content';
 import { Button } from '@/components/ui/button';
 import EMPLOYERS_API from '@/features/employers/api';
-import EmployerCard from '@/features/employers/components/employer-card';
+import EmployersCarousel from '@/features/employers/containers/employers-carousel';
 
 export default async function Home() {
   const employers = await EMPLOYERS_API.fetchAllEmployers({
@@ -26,15 +26,7 @@ export default async function Home() {
           <Button className="w-full">Знайти Роботодавця</Button>
         </PageContent>
       </div>
-      <div className="flex items-center gap-3 overflow-x-auto">
-        {employers?.rows.map((employer) => (
-          <EmployerCard
-            key={employer._id}
-            employer={employer}
-            className="shrink-0"
-          />
-        ))}
-      </div>
+      <EmployersCarousel employers={employers?.rows || []} />
     </div>
   );
 }
