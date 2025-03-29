@@ -15,8 +15,8 @@ export function EmployerBaseInfo({ employer }: Props) {
       {employer.logoUrl && (
         <Image
           src={employer.logoUrl}
-          width={64}
-          height={64}
+          width={96}
+          height={96}
           alt="logo"
           className="rounded"
         />
