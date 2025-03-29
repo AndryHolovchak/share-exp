@@ -17,16 +17,23 @@ const InputWithButton = React.forwardRef<HTMLInputElement, Props>(
     };
 
     return (
-      <div className="flex items-center gap-2">
+      <div className="flex h-12 items-center gap-0">
         <Input
           {...props}
+          containerClassName={cn(
+            'flex-1 h-full rounded-br-none rounded-tr-none border-r-0',
+            props?.containerClassName
+          )}
           ref={ref}
           onKeyDown={onEnterClick(handleEnterClick)}
         />
         <Button
           {...button}
           disabled={isDisabled}
-          className={cn('m-0', button?.className)}
+          className={cn(
+            'm-0 h-full rounded-bl-none rounded-tl-none',
+            button?.className
+          )}
         />
       </div>
     );

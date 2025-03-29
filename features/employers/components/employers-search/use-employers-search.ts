@@ -1,5 +1,6 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, useState, useTransition } from 'react';
+import { ROUTES } from '@/constants/routes';
 
 interface Props {
   initialValue: string;
@@ -17,7 +18,9 @@ export function useEmployersSearch({ initialValue = '' }: Props) {
       params.set('page', '1');
       params.set('search', value);
 
-      router.push(`?${params.toString()}`, { scroll: false });
+      router.push(`${ROUTES.EMPLOYERS()}?${params.toString()}`, {
+        scroll: false,
+      });
     });
   };
 

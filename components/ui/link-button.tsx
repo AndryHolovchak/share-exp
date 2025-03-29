@@ -1,3 +1,5 @@
+'use client';
+
 import { Button, ButtonProps } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { MouseEventHandler } from 'react';
@@ -26,10 +28,10 @@ export default function LinkButton({
 
   return (
     <Button
-      {...props}
       variant="link"
+      {...props}
       onClick={handleClick}
-      className={cn('p-0 text-blue-500', className)}
+      className={cn('p-0', className)}
     />
   );
 }

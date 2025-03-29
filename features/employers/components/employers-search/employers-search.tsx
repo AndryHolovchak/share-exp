@@ -4,8 +4,13 @@ import { SearchIcon } from 'lucide-react';
 import { InputWithButton } from '@/components/ui/inputs/input-with-button';
 import { useEmployersSearch } from '@/features/employers/components/employers-search/use-employers-search';
 import { useSearchParams } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
-export function EmployersSearch() {
+interface Props {
+  placeholder?: string;
+}
+
+export function EmployersSearch({ placeholder = '...' }: Props) {
   const searchParams = useSearchParams();
 
   const { search, input } = useEmployersSearch({
@@ -13,13 +18,19 @@ export function EmployersSearch() {
   });
 
   return (
-    <InputWithButton
-      {...input}
-      placeholder="..."
-      className="font-medium"
-      containerClassName="w-[460px] h-12"
-      startAdornment={<SearchIcon />}
-      button={{ children: 'Пошук', onClick: search }}
-    />
+    <form action="">
+      <InputWithButton
+        {...input}
+        type="search"
+        autoCorrect="off"
+        placeholder={placeholder}
+        className={cn('font-medium placeholder:font-normal')}
+        startAdornment={<SearchIcon />}
+        button={{
+          children: 'Пошук',
+          onClick: search,
+        }}
+      />
+    </form>
   );
 }

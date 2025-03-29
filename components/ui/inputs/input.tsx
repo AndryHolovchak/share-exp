@@ -40,20 +40,20 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <label
         className={cn(
-          'flex h-9 overflow-hidden rounded-md border border-input bg-transparent text-base shadow-sm transition-colors file:border-0 file:bg-transparent focus-within:ring-1 focus-within:ring-ring md:text-sm',
+          'flex h-9 overflow-hidden rounded-md border border-input bg-white text-base shadow-sm transition-colors file:border-0 file:bg-transparent focus-within:ring-1 focus-within:ring-ring md:text-sm',
           { 'cursor-not-allowed opacity-50': props.disabled },
           containerClassName
         )}
       >
         {startAdornment && (
-          <AdornmentContainer className="pl-2">
+          <AdornmentContainer className="bg-inherit pl-2">
             {startAdornment}
           </AdornmentContainer>
         )}
         <input
           type={type}
           className={cn(
-            'h-full w-full px-3 py-1 file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus:outline-none focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-inherit',
+            'h-full w-full bg-white px-3 py-1 file:text-sm file:font-medium file:text-foreground placeholder:text-slate-400 focus:outline-none focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-inherit',
             className
           )}
           ref={ref}

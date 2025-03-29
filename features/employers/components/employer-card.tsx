@@ -9,16 +9,26 @@ import {
 } from '@/components/ui/card';
 import { EmployerBaseInfo } from '@/features/employers/components/employer-base-info';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 interface Props {
   employer: Employer;
-  className?: string;
+  cardClassName?: string;
+  containerClassName?: string;
 }
 
-export default function EmployerCard({ employer, className }: Props) {
+export default function EmployerCard({
+  employer,
+  containerClassName,
+  cardClassName,
+}: Props) {
   return (
-    <Link href={`/employers/${employer._id}/reviews`} key={employer._id}>
-      <Card className={className}>
+    <Link
+      className={containerClassName}
+      href={`/employers/${employer._id}/reviews`}
+      key={employer._id}
+    >
+      <Card className={cn('', cardClassName)}>
         <CardHeader className="pb-1">
           <div className="flex justify-between">
             <EmployerBaseInfo employer={employer} />

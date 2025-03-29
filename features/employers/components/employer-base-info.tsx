@@ -1,7 +1,6 @@
 import { Employer, EmployerDetails } from '@/features/employers/types';
 import Image from 'next/image';
 import { RatingView } from '@/features/reviews/components/rating-view/rating-view';
-import { Link1Icon } from '@radix-ui/react-icons';
 import { InfoIcon, LinkIcon } from 'lucide-react';
 import DataItemList, {
   DataItemListConfig,
@@ -28,7 +27,11 @@ const DATA_ITEM_LIST_CONFIG: DataItemListConfig<
     className: 'cursor-pointer text-sky-500 w-fit',
     icon: <LinkIcon />,
     render: ({ website }) => (
-      <LinkButton href={website} target="_blank" className="h-fit text-inherit">
+      <LinkButton
+        href={website}
+        target="_blank"
+        className="h-fit text-inherit hover:underline"
+      >
         Сайт
       </LinkButton>
     ),
@@ -42,29 +45,31 @@ const DATA_ITEM_LIST_CONFIG: DataItemListConfig<
 
 export function EmployerBaseInfo({ employer }: Props) {
   return (
-    <div className="flex w-full justify-between">
-      <div className="flex flex-col gap-1">
-        <b>{employer.name}</b>
-        <RatingView
-          rating={employer.averageRating}
-          count={employer.totalReviews}
-        />
-        <DataItemList
-          data={employer}
-          config={DATA_ITEM_LIST_CONFIG}
-          className="mt-1"
-        />
+    <div className="flex w-full flex-col justify-between">
+      <div className="flex justify-between gap-1">
+        <div className="flex flex-col gap-1">
+          <b>{employer.name}</b>
+          <RatingView
+            rating={employer.averageRating}
+            count={employer.totalReviews}
+          />
+        </div>
+        {employer.logoUrl && (
+          <Image
+            unoptimized
+            src={employer.logoUrl}
+            width={100}
+            height={50}
+            alt="logo"
+            className="h-[50px] w-[100px]"
+          />
+        )}
       </div>
-      {employer.logoUrl && (
-        <Image
-          unoptimized
-          src={employer.logoUrl}
-          width={100}
-          height={50}
-          alt="logo"
-          className="h-[50px] w-[100px]"
-        />
-      )}
+      <DataItemList
+        data={employer}
+        config={DATA_ITEM_LIST_CONFIG}
+        className="mt-1"
+      />
     </div>
   );
 }
