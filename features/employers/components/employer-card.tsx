@@ -29,12 +29,12 @@ export default function EmployerCard({
       key={employer._id}
     >
       <Card className={cn('', cardClassName)}>
-        <CardHeader className="pb-1">
+        <CardHeader className="p-4 pb-1">
           <div className="flex justify-between">
             <EmployerBaseInfo employer={employer} />
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-4 pt-0">
           <CardDescription>
             <div
               className="text-slate-800"
