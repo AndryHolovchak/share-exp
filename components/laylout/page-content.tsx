@@ -1,7 +1,19 @@
-import { PropsWithChildren } from 'react';
+import { ElementType, PropsWithChildren } from 'react';
+import { cn } from '@/lib/utils';
 
-export function PageContent({ children }: PropsWithChildren) {
+interface Props extends PropsWithChildren {
+  as?: ElementType;
+  className?: string;
+}
+
+export function PageContent({
+  as: Component = 'main',
+  children,
+  className,
+}: Props) {
   return (
-    <div className="mx-auto max-w-[720px] flex-1 p-6 pt-0">{children}</div>
+    <Component className={cn('mx-auto max-w-[720px] flex-1 p-6', className)}>
+      {children}
+    </Component>
   );
 }
