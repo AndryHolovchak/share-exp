@@ -36,11 +36,6 @@ const DATA_ITEM_LIST_CONFIG: DataItemListConfig<
       </LinkButton>
     ),
   },
-  {
-    className: 'text-slate-500',
-    key: 'categoryDescription',
-    icon: <InfoIcon />,
-  },
 ];
 
 export function EmployerBaseInfo({ employer }: Props) {
@@ -65,11 +60,16 @@ export function EmployerBaseInfo({ employer }: Props) {
           />
         )}
       </div>
-      <DataItemList
-        data={employer}
-        config={DATA_ITEM_LIST_CONFIG}
-        className="mt-1"
-      />
+      <div className="flex flex-col gap-1">
+        <DataItemList
+          data={employer}
+          config={DATA_ITEM_LIST_CONFIG}
+          className="mt-1"
+        />
+        <span className="text-sm text-slate-500">
+          {employer.categoryDescription}
+        </span>
+      </div>
     </div>
   );
 }

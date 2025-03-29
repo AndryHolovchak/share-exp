@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 interface Item<Data> {
   key: keyof Data;
   className?: string;
-  icon: DataItemConfig['icon'];
+  icon?: DataItemConfig['icon'];
   render?: (value: Data) => DataItemConfig['value'];
 }
 
