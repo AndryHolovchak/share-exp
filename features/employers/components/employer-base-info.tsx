@@ -53,10 +53,10 @@ export function EmployerBaseInfo({ employer }: Props) {
           <Image
             unoptimized
             src={employer.logoUrl}
-            width={100}
-            height={50}
+            width={80}
+            height={40}
             alt="logo"
-            className="h-[50px] w-[100px]"
+            className="h-[40px] w-[80px]"
           />
         )}
       </div>
