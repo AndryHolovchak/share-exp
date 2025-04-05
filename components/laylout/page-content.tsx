@@ -12,7 +12,7 @@ export function PageContent({
   className,
 }: Props) {
   return (
-    <Component className={cn('mx-auto max-w-[720px] flex-1 p-6', className)}>
+    <Component className={cn('mx-auto max-w-[720px] flex-1 p-4', className)}>
       {children}
     </Component>
   );

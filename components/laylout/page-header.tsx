@@ -9,29 +9,19 @@ import AuthGate from '@/auth/containers/auth-gate';
 import SignInButton from '@/auth/components/sign-in-button';
 
 interface Props {
-  leftSlot?: ReactNode;
   centralSlot?: ReactNode;
-  rightSlot?: ReactNode;
   withBackButton?: boolean;
   backButtonHref?: string;
 }
 
-function Slot(props: HTMLProps<HTMLDivElement>) {
-  return (
-    <div {...props} className={cn('flex items-center', props.className)} />
-  );
-}
-
 export function PageHeader({
-  leftSlot,
   centralSlot,
-  rightSlot,
   withBackButton,
   backButtonHref,
 }: Props) {
   return (
     <header className="sticky top-0 z-10">
-      <Card className="mb-8 flex items-center rounded-none p-6">
+      <Card className="flex items-center rounded-none p-3 shadow-sm">
         {withBackButton && (
           <Link href={backButtonHref ?? './'}>
             <Button variant="outline" className="mr-6">
@@ -40,18 +30,17 @@ export function PageHeader({
           </Link>
         )}
 
-        <div className="grid flex-1 grid-cols-[0.5fr_1fr_0.5fr] gap-2">
-          <Slot>{leftSlot}</Slot>
-          <Slot className="justify-center">{centralSlot}</Slot>
-          <Slot>
-            {rightSlot}
-            <div className="ml-auto">
-              <AuthGate
-                authenticated={<UserMenu />}
-                unauthenticated={<SignInButton />}
-              />
-            </div>
-          </Slot>
+        {centralSlot && (
+          <div className="flex w-full flex-1 justify-center pr-[80px] sm:px-[80px]">
+            {centralSlot}
+          </div>
+        )}
+
+        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+          <AuthGate
+            authenticated={<UserMenu />}
+            unauthenticated={<SignInButton />}
+          />
         </div>
       </Card>
     </header>

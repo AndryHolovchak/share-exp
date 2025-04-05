@@ -17,7 +17,7 @@ const InputWithButton = React.forwardRef<HTMLInputElement, Props>(
     };
 
     return (
-      <div className="flex h-12 items-center gap-0">
+      <div className="flex h-10 items-center gap-0">
         <Input
           {...props}
           containerClassName={cn(

@@ -14,8 +14,9 @@ export default async function Page(props: Props) {
   return (
     <div>
       <PageHeader
-        leftSlot={<PageTitle>Список Роботодавців</PageTitle>}
-        centralSlot={<EmployersSearch />}
+        centralSlot={
+          <EmployersSearch containerClassName="w-full max-w-[520px]" />
+        }
       />
       <PageContent>
         <EmployersList {...normalizeListParams(listParams)} />

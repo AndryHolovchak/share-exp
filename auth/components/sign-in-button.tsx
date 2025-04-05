@@ -9,12 +9,7 @@ export default function SignInButton(props: Omit<ButtonProps, 'onClick'>) {
 
   return (
     <>
-      <Button
-        size="sm"
-        variant="outline"
-        onClick={disclosure.onOpen}
-        {...props}
-      >
+      <Button size="sm" variant="ghost" onClick={disclosure.onOpen} {...props}>
         Увійти
       </Button>
       <SignInModal {...disclosure} />

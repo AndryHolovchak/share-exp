@@ -16,7 +16,7 @@ export function useEmployersSearch({ initialValue = '' }: Props) {
     startTransition(() => {
       const params = new URLSearchParams(searchParams.toString());
       params.set('page', '1');
-      params.set('search', value);
+      params.set('search', value.trim());
 
       router.push(`${ROUTES.EMPLOYERS()}?${params.toString()}`, {
         scroll: false,

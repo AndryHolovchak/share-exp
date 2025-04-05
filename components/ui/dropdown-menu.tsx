@@ -5,6 +5,9 @@ import {
   MenubarItem,
   MenubarMenu,
   MenubarTrigger,
+  MenubarLabel,
+  MenubarSeparator,
+  MenubarGroup,
 } from '@/components/ui/menubar';
 
 export interface DropdownMenuOption {
@@ -14,20 +17,29 @@ export interface DropdownMenuOption {
 
 interface Props {
   trigger: ReactNode;
+  label?: ReactNode;
   options: DropdownMenuOption[];
 }
 
-export default function DropdownMenu({ trigger, options }: Props) {
+export default function DropdownMenu({ label, trigger, options }: Props) {
   return (
     <Menubar>
       <MenubarMenu>
         <MenubarTrigger>{trigger}</MenubarTrigger>
         <MenubarContent align="end">
-          {options.map((option, index) => (
-            <MenubarItem key={index} onClick={option.onClick}>
-              {option.content}
-            </MenubarItem>
-          ))}
+          {label && (
+            <>
+              <MenubarLabel>{label}</MenubarLabel>
+              <MenubarSeparator />
+            </>
+          )}
+          <MenubarGroup>
+            {options.map((option, index) => (
+              <MenubarItem key={index} onClick={option.onClick}>
+                {option.content}
+              </MenubarItem>
+            ))}
+          </MenubarGroup>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
