@@ -8,10 +8,17 @@ interface Props {
   title?: ReactNode;
   count?: number;
   rating: Rating;
+  titleClassName?: string;
   iconProps?: HTMLAttributes<SVGElement>;
 }
 
-export function RatingView({ title, count, rating, iconProps }: Props) {
+export function RatingView({
+  title,
+  count,
+  rating,
+  iconProps,
+  titleClassName,
+}: Props) {
   return (
     <div className="flex gap-2">
       <div className="flex">
@@ -42,7 +49,11 @@ export function RatingView({ title, count, rating, iconProps }: Props) {
         )}
       </div>
       {title && (
-        <span className="text-sm font-medium text-slate-600">{title}</span>
+        <span
+          className={cn('text-sm font-medium text-slate-600', titleClassName)}
+        >
+          {title}
+        </span>
       )}
     </div>
   );

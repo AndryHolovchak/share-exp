@@ -2,12 +2,15 @@ import { NextPageProps } from '@/types/next';
 import EMPLOYERS_API from '@/features/employers/api';
 import { PageHeader } from '@/components/laylout/page-header';
 import { PageContent } from '@/components/laylout/page-content';
-import { EmployerReviews } from '@/features/employers/containers/employer-reviews';
 import { ListPaginationParams } from '@/types/list';
-import { normalizeListPaginationParams } from '@/utils/normalize-list-pagination-params';
 import AddReviewButton from '@/features/reviews/components/add-review-button';
 import { redirect, RedirectType } from 'next/navigation';
 import { ROUTES } from '@/constants/routes';
+import PageIntro from '@/components/ui/page-intro';
+import { EmployerBaseInfo } from '@/features/employers/components/employer-base-info';
+import EmployerDescription from '@/features/employers/components/employer-description';
+import EmployerRatingsOverview from '@/features/employers/components/employer-ratings-overview';
+import { Separator } from '@/components/ui/separator';
 
 type Props = NextPageProps<{ employerId: string }, ListPaginationParams>;
 
@@ -26,12 +29,36 @@ export default async function EmployerReviewsPage({
   return (
     <div>
       <PageHeader withBackButton backButtonHref="../" />
+      <PageIntro
+        className="py-2"
+        innerClassName="gap-2 md:gap-2"
+        title={
+          <EmployerBaseInfo
+            nameComponent="h1"
+            titleClassName="text-xl font-medium"
+            employer={employer}
+            hidden={{ rating: true }}
+          />
+        }
+        content={
+          <div className="flex flex-col gap-9">
+            <div className="flex flex-col gap-3">
+              <EmployerDescription
+                className="text-sm text-slate-600"
+                description={employer.shortDescriptionHtml}
+              />
+              <Separator className="mx-auto bg-slate-300" />
+              <EmployerRatingsOverview ratings={employer.averageRatings} />
+            </div>
+            <AddReviewButton employerId={employerId} className="mb-8 w-full" />
+          </div>
+        }
+      />
       <PageContent>
-        <AddReviewButton employerId={employerId} className="mb-8 w-full" />
-        <EmployerReviews
-          employerId={employerId}
-          pagination={normalizeListPaginationParams(pagination)}
-        />
+        {/*<EmployerReviews*/}
+        {/*  employerId={employerId}*/}
+        {/*  pagination={normalizeListPaginationParams(pagination)}*/}
+        {/*/>*/}
       </PageContent>
     </div>
   );

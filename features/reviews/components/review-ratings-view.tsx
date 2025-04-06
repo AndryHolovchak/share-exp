@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { PopoverArrow } from '@radix-ui/react-popover';
 import { REVIEW_RATING_CATEGORY_LABELS } from '@/features/reviews/constants';
+import ReviewRatingsWithCategories from '@/features/reviews/review-ratings-with-categories';
 
 interface Props {
   ratings: ReviewRatings;
@@ -57,18 +58,10 @@ export default function ReviewRatingsView({ ratings, count }: Props) {
       <PopoverContent
         align="start"
         sideOffset={1}
-        className="flex w-fit flex-col gap-1 p-2"
+        className="p-2"
         onClick={(event) => event.preventDefault()}
       >
-        {Object.entries(ratings).map(([category, rating]) => (
-          <RatingView
-            key={category}
-            rating={rating}
-            title={
-              REVIEW_RATING_CATEGORY_LABELS[category as ReviewRatingCategory]
-            }
-          />
-        ))}
+        <ReviewRatingsWithCategories ratings={ratings} />
       </PopoverContent>
     </Popover>
   );

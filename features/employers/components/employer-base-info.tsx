@@ -9,6 +9,8 @@ import LinkButton from '@/components/ui/link-button';
 import calculateAverageRating from '@/features/reviews/utils/calculateAverageRating';
 import reviewRatingsView from '@/features/reviews/components/review-ratings-view';
 import ReviewRatingsView from '@/features/reviews/components/review-ratings-view';
+import { JSX } from 'react';
+import { cn } from '@/lib/utils';
 
 interface Props {
   employer: Pick<
@@ -20,6 +22,9 @@ interface Props {
     | 'website'
     | 'categoryDescription'
   >;
+  hidden?: { rating?: boolean };
+  titleClassName?: string;
+  nameComponent?: keyof JSX.IntrinsicElements;
 }
 
 const DATA_ITEM_LIST_CONFIG: DataItemListConfig<
@@ -41,18 +46,31 @@ const DATA_ITEM_LIST_CONFIG: DataItemListConfig<
   },
 ];
 
-export function EmployerBaseInfo({ employer }: Props) {
+export function EmployerBaseInfo({
+  employer,
+  hidden,
+  titleClassName,
+  nameComponent: NameComponent = 'h4',
+}: Props) {
   return (
     <div className="flex w-full flex-col justify-between">
       <div className="flex justify-between gap-1">
-        <div className="flex flex-col gap-1">
-          <b>{employer.name}</b>
-          <RatingView
-            count={employer.totalReviews}
-            rating={calculateAverageRating(
-              Object.values(employer.averageRatings)
-            )}
-          />
+        <div className="flex flex-col items-start gap-1">
+          <NameComponent
+            className={cn('font-medium leading-normal', titleClassName)}
+          >
+            {employer.name}
+          </NameComponent>
+          {!hidden?.rating && (
+            <RatingView
+              count={employer.totalReviews}
+              rating={calculateAverageRating(
+                Object.values(employer.averageRatings)
+              )}
+            />
+          )}
+
+          <DataItemList data={employer} config={DATA_ITEM_LIST_CONFIG} />
         </div>
         {employer.logoUrl && (
           <Image
@@ -65,16 +83,9 @@ export function EmployerBaseInfo({ employer }: Props) {
           />
         )}
       </div>
-      <div className="flex flex-col gap-1">
-        <DataItemList
-          data={employer}
-          config={DATA_ITEM_LIST_CONFIG}
-          className="mt-1"
-        />
-        <span className="text-sm text-slate-500">
-          {employer.categoryDescription}
-        </span>
-      </div>
+      <span className="text-left text-sm text-slate-500">
+        {employer.categoryDescription}
+      </span>
     </div>
   );
 }

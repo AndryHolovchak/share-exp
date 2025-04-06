@@ -10,6 +10,7 @@ import {
 import { EmployerBaseInfo } from '@/features/employers/components/employer-base-info';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import EmployerDescription from '@/features/employers/components/employer-description';
 
 interface Props {
   employer: Employer;
@@ -36,12 +37,7 @@ export default function EmployerCard({
         </CardHeader>
         <CardContent className="p-4 pt-0">
           <CardDescription>
-            <div
-              className="text-slate-800"
-              dangerouslySetInnerHTML={{
-                __html: employer.shortDescriptionHtml,
-              }}
-            />
+            <EmployerDescription description={employer.shortDescriptionHtml} />
           </CardDescription>
         </CardContent>
       </Card>
