@@ -1,4 +1,3 @@
-import { PageTitle } from '@/components/laylout/page-title';
 import { PageHeader } from '@/components/laylout/page-header';
 import { EmployersSearch } from '@/features/employers/components/employers-search/employers-search';
 import { PageContent } from '@/components/laylout/page-content';

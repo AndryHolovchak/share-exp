@@ -7,6 +7,7 @@ import { ROUTES } from '@/constants/routes';
 import ReviewVoteControls from '@/features/reviews/components/review-vote-controls';
 import EditorValue from '@/components/ui/lexical/components/editor-value';
 import ReviewActions from '@/features/reviews/components/review-actions';
+import ReviewRatingsView from '@/features/reviews/components/review-ratings-view';
 
 interface Props {
   review: Review;
@@ -38,7 +39,7 @@ export default function ReviewView({ review }: Props) {
             </time>
           </div>
           <div className="ml-auto flex items-center gap-0.5">
-            <RatingView rating={review.rating} />
+            <ReviewRatingsView ratings={review.ratings} />
           </div>
           {review.employer && (
             <>

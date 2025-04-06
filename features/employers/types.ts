@@ -1,4 +1,4 @@
-import { Rating } from '@/features/reviews/types';
+import { Rating, ReviewRatings } from '@/features/reviews/types';
 
 export interface EmployerDetails {
   name: string;
@@ -12,5 +12,5 @@ export interface Employer extends EmployerDetails {
   _id: string;
   createdAt: string;
   totalReviews: number;
-  averageRating: Rating;
+  averageRatings: ReviewRatings;
 }

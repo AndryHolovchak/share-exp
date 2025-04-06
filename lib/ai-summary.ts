@@ -13,12 +13,12 @@ if (!process.env.OPENAI_API_KEY) {
 // });
 
 export async function summarizeReviews(
-  employer: Pick<Employer, 'averageRating' | 'name'>,
+  employer: Pick<Employer, 'averageRatings' | 'name'>,
   reviews: Review[]
 ) {
   const prompt = `Write a summary of the reviews for the ${
     employer.name
-  } product. The product's average rating is ${employer.averageRating} out of 5 stars. 
+  } product. The product's average rating is ${employer.averageRatings} out of 5 stars. 
 Your goal is to highlight the most common themes and sentiments expressed by customers.
 If multiple themes are present, try to capture the most important ones.
 If no patterns emerge but there is a shared sentiment, capture that instead.

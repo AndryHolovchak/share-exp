@@ -45,7 +45,7 @@ export function EmployersSearch({
           children: (
             <>
               <SearchIcon className="inline sm:hidden" />
-              <span className="hidden sm:inline">Шукати</span>
+              <span className="hidden sm:inline">Пошук</span>
             </>
           ),
         }}

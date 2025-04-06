@@ -6,12 +6,15 @@ import DataItemList, {
   DataItemListConfig,
 } from '@/components/ui/data-item-list';
 import LinkButton from '@/components/ui/link-button';
+import calculateAverageRating from '@/features/reviews/utils/calculateAverageRating';
+import reviewRatingsView from '@/features/reviews/components/review-ratings-view';
+import ReviewRatingsView from '@/features/reviews/components/review-ratings-view';
 
 interface Props {
   employer: Pick<
     Employer,
     | 'name'
-    | 'averageRating'
+    | 'averageRatings'
     | 'totalReviews'
     | 'logoUrl'
     | 'website'
@@ -45,8 +48,10 @@ export function EmployerBaseInfo({ employer }: Props) {
         <div className="flex flex-col gap-1">
           <b>{employer.name}</b>
           <RatingView
-            rating={employer.averageRating}
             count={employer.totalReviews}
+            rating={calculateAverageRating(
+              Object.values(employer.averageRatings)
+            )}
           />
         </div>
         {employer.logoUrl && (

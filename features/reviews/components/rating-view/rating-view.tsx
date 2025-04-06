@@ -1,42 +1,48 @@
 'use client';
 
 import { Rating } from '@/features/reviews/types';
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 interface Props {
+  title?: ReactNode;
   count?: number;
   rating: Rating;
   iconProps?: HTMLAttributes<SVGElement>;
 }
 
-export function RatingView({ count, rating, iconProps }: Props) {
+export function RatingView({ title, count, rating, iconProps }: Props) {
   return (
-    <div className="flex">
-      <div className="flex items-center gap-1">
-        {[...Array(5)].map((_, i) =>
-          i < rating ? (
-            <StarIcon
-              key={i}
-              data-rating={`${i + 1}`}
-              {...iconProps}
-              className={cn('h-5 w-5 fill-black', iconProps?.className)}
-            />
-          ) : (
-            <StarIcon
-              key={i}
-              data-rating={`${i + 1}`}
-              {...iconProps}
-              className={cn(
-                'h-5 w-5 fill-muted stroke-muted-foreground',
-                iconProps?.className
-              )}
-            />
-          )
+    <div className="flex gap-2">
+      <div className="flex">
+        <div className="flex items-center gap-1">
+          {[...Array(5)].map((_, i) =>
+            i < rating ? (
+              <StarIcon
+                key={i}
+                data-rating={`${i + 1}`}
+                {...iconProps}
+                className={cn('h-5 w-5 fill-black', iconProps?.className)}
+              />
+            ) : (
+              <StarIcon
+                key={i}
+                data-rating={`${i + 1}`}
+                {...iconProps}
+                className={cn(
+                  'h-5 w-5 fill-muted stroke-muted-foreground',
+                  iconProps?.className
+                )}
+              />
+            )
+          )}
+        </div>
+        {count != null && (
+          <sup className="left-0.5 top-1.5 text-muted-foreground">{count}</sup>
         )}
       </div>
-      {count != null && (
-        <sup className="left-1 top-1.5 text-muted-foreground">{count}</sup>
+      {title && (
+        <span className="text-sm font-medium text-slate-600">{title}</span>
       )}
     </div>
   );

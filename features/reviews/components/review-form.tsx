@@ -13,7 +13,13 @@ function SubmitButton() {
 }
 
 const DEFAULT_VALUES: ReviewContent = {
-  rating: 4,
+  ratings: {
+    salary_and_benefits: 3,
+    work_life_balance: 3,
+    justice_and_equality: 3,
+    career_growth: 3,
+    management: 3,
+  },
   content: '',
   anonymous: false,
 };
@@ -40,10 +46,10 @@ export default function ReviewForm({
           setFormValues({ ...formValues, anonymous: value as boolean })
         }
       />
-      <RatingInput
-        rating={formValues.rating}
-        onChange={(rating) => setFormValues({ ...formValues, rating })}
-      />
+      {/*<RatingInput*/}
+      {/*  rating={formValues.ratings}*/}
+      {/*  onChange={(rating) => setFormValues({ ...formValues, ratings: rating })}*/}
+      {/*/>*/}
       <Editor
         initialValue={formValues.content}
         onChange={(value) => setFormValues({ ...formValues, content: value })}

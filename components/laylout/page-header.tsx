@@ -1,5 +1,4 @@
-import { HTMLProps, ReactNode } from 'react';
-import { cn } from '@/lib/utils';
+import { ReactNode } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
@@ -20,7 +19,7 @@ export function PageHeader({
   backButtonHref,
 }: Props) {
   return (
-    <header className="sticky top-0 z-10">
+    <header className="sticky top-0 z-[1000]">
       <Card className="flex items-center rounded-none p-3 shadow-sm">
         {withBackButton && (
           <Link href={backButtonHref ?? './'}>

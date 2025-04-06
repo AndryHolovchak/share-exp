@@ -1,5 +1,4 @@
 import { PageHeader } from '@/components/laylout/page-header';
-import { PageTitle } from '@/components/laylout/page-title';
 import { PageContent } from '@/components/laylout/page-content';
 import { NextPageProps } from '@/types/next';
 import { ListParams } from '@/types/list';
@@ -14,11 +13,7 @@ export default async function Page(props: Props) {
 
   return (
     <div>
-      <PageHeader
-        withBackButton
-        backButtonHref={ROUTES.EMPLOYERS()}
-        leftSlot={<PageTitle>Мої відгуки</PageTitle>}
-      />
+      <PageHeader withBackButton backButtonHref={ROUTES.EMPLOYERS()} />
       <PageContent>
         <UserReviews pagination={normalizeListPaginationParams(listParams)} />
       </PageContent>
