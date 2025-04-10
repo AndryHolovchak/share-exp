@@ -19,7 +19,7 @@ export default function EmployerRatingsOverview({ ratings, className }: Props) {
         className
       )}
     >
-      <ReviewRatingsWithCategories ratings={ratings} />
+      <ReviewRatingsWithCategories ratings={ratings} size="lg" />
       <div className="flex items-center gap-4">
         <span className="text-6xl font-bold">{averageRating}</span>
         <StarIcon className="size-12 fill-black" />

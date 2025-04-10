@@ -16,7 +16,9 @@ export type ReviewRatings = Record<ReviewRatingCategory, Rating>;
 
 export interface ReviewContent {
   // Editor state
-  content?: string;
+  pros?: string;
+  // Editor state
+  cons?: string;
   anonymous: boolean;
   ratings: ReviewRatings;
 }

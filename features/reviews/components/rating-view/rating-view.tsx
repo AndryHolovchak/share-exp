@@ -3,11 +3,14 @@
 import { Rating } from '@/features/reviews/types';
 import { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { RatingViewSize } from '@/features/reviews/components/rating-view/types';
+import { RATING_VIEW_SIZES } from '@/features/reviews/components/rating-view/constants';
 
 interface Props {
   title?: ReactNode;
   count?: number;
   rating: Rating;
+  size?: RatingViewSize;
   titleClassName?: string;
   iconProps?: HTMLAttributes<SVGElement>;
 }
@@ -18,7 +21,12 @@ export function RatingView({
   rating,
   iconProps,
   titleClassName,
+  size = 'md',
 }: Props) {
+  const iconSize = RATING_VIEW_SIZES[size];
+
+  const iconStyles = { height: iconSize, width: iconSize, ...iconProps?.style };
+
   return (
     <div className="flex gap-2">
       <div className="flex">
@@ -29,13 +37,15 @@ export function RatingView({
                 key={i}
                 data-rating={`${i + 1}`}
                 {...iconProps}
-                className={cn('h-5 w-5 fill-black', iconProps?.className)}
+                style={iconStyles}
+                className={cn('fill-black', iconProps?.className)}
               />
             ) : (
               <StarIcon
                 key={i}
                 data-rating={`${i + 1}`}
                 {...iconProps}
+                style={iconStyles}
                 className={cn(
                   'h-5 w-5 fill-muted stroke-muted-foreground',
                   iconProps?.className

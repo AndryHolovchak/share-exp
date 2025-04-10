@@ -1,8 +1,7 @@
 'use client';
 
 import { Review, ReviewVote } from '@/features/reviews/types';
-import { Button } from '@/components/ui/button';
-import { MinusIcon, PlusIcon } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import { clsx } from 'clsx';
 import { useEffect, useState } from 'react';
 import REVIEWS_API from '@/features/reviews/api';
@@ -38,35 +37,36 @@ export default function ReviewVoteControls({ className, review }: Props) {
   });
 
   return (
-    <div className={clsx('flex items-center gap-1', className)}>
-      <Button
+    <div
+      className={clsx(
+        'flex items-center rounded border border-slate-200',
+        className
+      )}
+    >
+      <button
         onClick={() => vote(-1)}
-        variant="ghost"
-        size="icon"
-        className={clsx('text-muted-foreground', {
-          'text-primary': userVote === -1,
+        className={clsx('text-red-300 transition-colors', {
+          'text-red-500': userVote === -1,
         })}
       >
-        <MinusIcon />
-      </Button>
+        <ChevronDown />
+      </button>
       <span
-        className={clsx('min-w-6 text-center text-muted-foreground', {
+        className={clsx('min-w-6 text-center text-sm text-muted-foreground', {
           'text-red-600': voteRating < 0,
           'text-green-600': voteRating > 0,
         })}
       >
         {voteRating}
       </span>
-      <Button
+      <button
         onClick={() => vote(1)}
-        variant="ghost"
-        size="icon"
-        className={clsx('text-muted-foreground', {
-          'text-primary': userVote === 1,
+        className={clsx('text-green-300 transition-colors', {
+          'text-green-500': userVote === 1,
         })}
       >
-        <PlusIcon />
-      </Button>
+        <ChevronUp />
+      </button>
     </div>
   );
 }

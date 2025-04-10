@@ -1,18 +1,17 @@
 import { Review } from '@/features/reviews/types';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { RatingView } from '@/features/reviews/components/rating-view/rating-view';
 import ms from 'ms';
-import Link from 'next/link';
-import { ROUTES } from '@/constants/routes';
 import ReviewVoteControls from '@/features/reviews/components/review-vote-controls';
-import EditorValue from '@/components/ui/lexical/components/editor-value';
-import ReviewActions from '@/features/reviews/components/review-actions';
-import calculateAverageRating from '@/features/reviews/utils/calculateAverageRating';
+import { twMerge } from 'tailwind-merge';
+import ReviewRatingsView from '@/features/reviews/components/review-ratings-view';
+import ReviewActionMenu from '@/features/reviews/components/review-action-menu';
+import ReviewTextContent from '@/features/reviews/components/review-text-content';
 
 interface Props {
   review: Review;
+  className?: string;
 }
-export default function ReviewView({ review }: Props) {
+export default function ReviewView({ review, className }: Props) {
   const renderAuthorName = () => {
     if (review.anonymous) {
       return `Анонімно${review.isCurrentUserReview ? ' (Ви)' : ''}`;
@@ -22,47 +21,30 @@ export default function ReviewView({ review }: Props) {
   };
 
   return (
-    <div className="flex gap-4">
-      <Avatar className="h-10 w-10 border">
-        <AvatarImage alt="@shadcn" src={review.author?.picture} />
-        <AvatarFallback>?</AvatarFallback>
-      </Avatar>
-      <div className="grid gap-1">
-        <div className="flex items-start gap-2">
-          <div className="grid gap-0.5 text-sm">
-            <h3 className="font-semibold">{renderAuthorName()}</h3>
-            <time
-              className="text-sm text-gray-500 dark:text-gray-400"
-              suppressHydrationWarning
-            >
+    <div className={twMerge('flex flex-col gap-4 rounded-lg', className)}>
+      <div className="flex flex-1 flex-col gap-2">
+        <div className="flex items-center gap-2">
+          <Avatar className="h-10 w-10 border">
+            <AvatarImage alt="@shadcn" src={review.author?.picture} />
+            <AvatarFallback>?</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <span className="text-sm font-semibold">{renderAuthorName()}</span>
+            <time className="text-xs text-gray-500" suppressHydrationWarning>
               {timeAgo(new Date(review.createdAt))}
             </time>
           </div>
-          <div className="ml-auto flex items-center gap-0.5">
-            <RatingView
-              rating={calculateAverageRating(Object.values(review.ratings))}
-            />
-          </div>
-          {review.employer && (
-            <>
-              <span>|</span>
-              <Link
-                href={ROUTES.EMPLOYER_REVIEW(review.employer._id)}
-                className="font-medium underline"
-              >
-                {review.employer.name}
-              </Link>
-            </>
+          {review.isCurrentUserReview && (
+            <ReviewActionMenu className="ml-auto self-start" />
           )}
-          <ReviewVoteControls className="ml-4" review={review} />
         </div>
-        {review.content && (
-          <div className="text-sm leading-loose text-primary dark:text-gray-400">
-            <EditorValue value={review.content} />
-          </div>
-        )}
-        {review.isCurrentUserReview && <ReviewActions review={review} />}
+        <ReviewRatingsView ratings={review.ratings} />
       </div>
+      <div className="flex flex-col gap-2">
+        <ReviewTextContent value={review.pros || ''} type="pros" />
+        <ReviewTextContent value={review.cons || ''} type="cons" />
+      </div>
+      <ReviewVoteControls review={review} className="ml-auto" />
     </div>
   );
 }

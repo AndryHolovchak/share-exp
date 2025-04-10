@@ -12,7 +12,7 @@ interface Props {
 
 export async function Reviews({ reviews, pagination }: Props) {
   return (
-    <div className="relative mx-auto max-w-[960px] gap-12 px-4 md:px-6">
+    <div className="relative gap-12 md:px-6">
       <List
         count={reviews.count}
         pagination={pagination}

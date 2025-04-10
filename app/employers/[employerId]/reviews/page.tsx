@@ -11,6 +11,8 @@ import { EmployerBaseInfo } from '@/features/employers/components/employer-base-
 import EmployerDescription from '@/features/employers/components/employer-description';
 import EmployerRatingsOverview from '@/features/employers/components/employer-ratings-overview';
 import { Separator } from '@/components/ui/separator';
+import { EmployerReviews } from '@/features/employers/containers/employer-reviews';
+import { normalizeListPaginationParams } from '@/utils/normalize-list-pagination-params';
 
 type Props = NextPageProps<{ employerId: string }, ListPaginationParams>;
 
@@ -55,10 +57,10 @@ export default async function EmployerReviewsPage({
         }
       />
       <PageContent>
-        {/*<EmployerReviews*/}
-        {/*  employerId={employerId}*/}
-        {/*  pagination={normalizeListPaginationParams(pagination)}*/}
-        {/*/>*/}
+        <EmployerReviews
+          employerId={employerId}
+          pagination={normalizeListPaginationParams(pagination)}
+        />
       </PageContent>
     </div>
   );

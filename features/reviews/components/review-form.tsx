@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { ReviewContent } from '@/features/reviews/types';
-import RatingInput from '@/features/reviews/components/rating-input';
 import { Button } from '@/components/ui/button';
 import CheckboxField from '@/components/fields/checkbox-field';
-import Editor from '@/components/ui/lexical/editor';
 
 function SubmitButton() {
   const formStatus = useFormStatus();
@@ -20,7 +18,7 @@ const DEFAULT_VALUES: ReviewContent = {
     career_growth: 3,
     management: 3,
   },
-  content: '',
+  // content: '',
   anonymous: false,
 };
 
@@ -50,10 +48,10 @@ export default function ReviewForm({
       {/*  rating={formValues.ratings}*/}
       {/*  onChange={(rating) => setFormValues({ ...formValues, ratings: rating })}*/}
       {/*/>*/}
-      <Editor
-        initialValue={formValues.content}
-        onChange={(value) => setFormValues({ ...formValues, content: value })}
-      />
+      {/*<Editor*/}
+      {/*  initialValue={formValues.content}*/}
+      {/*  onChange={(value) => setFormValues({ ...formValues, content: value })}*/}
+      {/*/>*/}
       <SubmitButton />
     </form>
   );

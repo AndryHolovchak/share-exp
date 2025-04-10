@@ -1,6 +1,6 @@
 'use client';
 
-import { ReviewRatingCategory, ReviewRatings } from '@/features/reviews/types';
+import { ReviewRatings } from '@/features/reviews/types';
 import { RatingView } from '@/features/reviews/components/rating-view/rating-view';
 import calculateAverageRating from '@/features/reviews/utils/calculateAverageRating';
 import { cn } from '@/lib/utils';
@@ -38,15 +38,15 @@ export default function ReviewRatingsView({ ratings, count }: Props) {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
-        className="flex w-fit gap-1 rounded-md border bg-slate-100 p-1 px-2 transition-colors hover:bg-slate-200 focus:outline-none"
+        className="flex w-fit gap-1 rounded-md border border-slate-200 bg-white px-1 py-0.5 transition-colors hover:bg-slate-200 focus:outline-none"
         onClick={(event) => {
           event.preventDefault();
           setOpen(!open);
         }}
       >
         <RatingView
-          rating={calculateAverageRating(Object.values(ratings))}
           count={count}
+          rating={calculateAverageRating(Object.values(ratings))}
         />
         <ChevronDown
           className={cn(
@@ -58,7 +58,7 @@ export default function ReviewRatingsView({ ratings, count }: Props) {
       <PopoverContent
         align="start"
         sideOffset={1}
-        className="p-2"
+        className="w-fit max-w-full p-2"
         onClick={(event) => event.preventDefault()}
       >
         <ReviewRatingsWithCategories ratings={ratings} />

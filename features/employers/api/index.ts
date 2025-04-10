@@ -17,14 +17,11 @@ const EMPLOYERS_API = {
       body,
     }),
 
-  editReview: async (
-    id: string,
-    { ratings, content, anonymous }: ReviewContent
-  ) =>
+  editReview: async (id: string, { ratings, anonymous }: ReviewContent) =>
     apiAction(`/employers/reviews/${id}`, {
       body: {
         // ratings: rating,
-        content,
+        // content,
         anonymous,
       },
       method: 'PUT',

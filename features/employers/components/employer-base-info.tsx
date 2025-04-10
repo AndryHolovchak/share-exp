@@ -1,7 +1,7 @@
 import { Employer, EmployerDetails } from '@/features/employers/types';
 import Image from 'next/image';
 import { RatingView } from '@/features/reviews/components/rating-view/rating-view';
-import { InfoIcon, LinkIcon } from 'lucide-react';
+import { LinkIcon } from 'lucide-react';
 import DataItemList, {
   DataItemListConfig,
 } from '@/components/ui/data-item-list';
@@ -63,6 +63,7 @@ export function EmployerBaseInfo({
           </NameComponent>
           {!hidden?.rating && (
             <RatingView
+              size="lg"
               count={employer.totalReviews}
               rating={calculateAverageRating(
                 Object.values(employer.averageRatings)
